@@ -6,7 +6,7 @@
     <title>Pedra, Papel, Tesoura: Arena Elemental</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    <!-- Fontes do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,12 @@
                         fogo: { main: '#ef4444', glow: '#f87171', bg: '#450a0a' },
                         agua: { main: '#3b82f6', glow: '#60a5fa', bg: '#172554' },
                         terra: { main: '#10b981', glow: '#34d399', bg: '#064e3b' },
-                        ar: { main: '#06b6d4', glow: '#22d3ee', bg: '#083344' }
+                        ar: { main: '#06b6d4', glow: '#22d3ee', bg: '#083344' },
+                        raio: { main: '#facc15', glow: '#fde047', bg: '#422006' },
+                        normal: { main: '#a8a29e', glow: '#d6d3d1', bg: '#292524' },
+                        shadow: { main: '#a855f7', glow: '#c084fc', bg: '#2e1065' },
+                        luz: { main: '#fef08a', glow: '#ffffff', bg: '#713f12' },
+                        dragao: { main: '#f97316', glow: '#fb923c', bg: '#431407' }
                     }
                 }
             }
@@ -36,14 +41,13 @@
             background: #090d16;
             color: #f1f5f9;
             user-select: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .font-title {
             font-family: 'Cinzel', serif;
         }
 
-        /* Animations */
+        /* Animações Customizadas */
         @keyframes float-up {
             0% { opacity: 1; transform: translateY(0) scale(1); }
             50% { opacity: 1; transform: translateY(-30px) scale(1.2); }
@@ -92,18 +96,14 @@
             background: #475569;
         }
 
-        /* LIGHT MODE HIGH CONTRAST */
         body.light-mode {
-            background-color: #f8fafc;
-            background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
+            background: #f1f5f9;
             color: #0f172a;
         }
 
         body.light-mode header {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.9);
             border-color: #cbd5e1;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         body.light-mode #class-select-screen,
@@ -111,112 +111,56 @@
         body.light-mode #player-card,
         body.light-mode #cpu-card,
         body.light-mode #game-over-modal > div,
-        body.light-mode #surrender-modal > div,
-        body.light-mode #ranking-modal > div {
-            background-color: #ffffff !important;
-            border-color: #cbd5e1 !important;
-            color: #0f172a !important;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
-        }
-
-        body.light-mode input,
-        body.light-mode select {
-            background-color: #ffffff !important;
-            color: #0f172a !important;
-            border: 2px solid #94a3b8 !important;
-            font-weight: 700 !important;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06) !important;
-        }
-
-        body.light-mode input:focus,
-        body.light-mode select:focus {
-            border-color: #f59e0b !important;
-            background-color: #ffffff !important;
-            outline: none !important;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2) !important;
+        body.light-mode #ranking-modal > div,
+        body.light-mode #modal-rank-badge {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-color: #cbd5e1;
+            color: #0f172a;
         }
 
         body.light-mode .class-card,
         body.light-mode .rps-btn,
         body.light-mode .skill-btn {
-            background-color: #ffffff !important;
-            border-color: #cbd5e1 !important;
-            color: #0f172a !important;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04) !important;
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            color: #1e293b;
+        }
+
+        body.light-mode thead {
+            background-color: #e2e8f0;
+            color: #b45309;
         }
 
         body.light-mode .class-card:hover,
         body.light-mode .rps-btn:hover,
         body.light-mode .skill-btn:hover {
-            background-color: #f1f5f9 !important;
-            border-color: #f59e0b !important;
+            background-color: #e2e8f0;
         }
 
-        body.light-mode .class-card .bg-slate-950\/60,
+        body.light-mode #combat-log,
+        body.light-mode #round-status-banner,
+        body.light-mode select,
+        body.light-mode .bg-slate-950,
         body.light-mode .bg-slate-950\/50,
         body.light-mode .bg-slate-950\/60,
         body.light-mode .bg-slate-800\/80 {
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
-            color: #1e293b !important;
-        }
-
-        body.light-mode #round-status-banner {
-            background-color: #fef3c7 !important;
-            border-color: #fde047 !important;
-            color: #78350f !important;
-        }
-
-        body.light-mode #combat-log {
-            background-color: #ffffff !important;
+            background-color: #e2e8f0 !important;
             border-color: #cbd5e1 !important;
             color: #0f172a !important;
         }
 
-        body.light-mode #combat-log p.text-slate-500 { color: #64748b !important; }
-        body.light-mode #combat-log p.text-slate-400 { color: #475569 !important; }
-        body.light-mode #combat-log p.text-slate-300 { color: #334155 !important; }
-        body.light-mode #combat-log p.text-slate-200 { color: #0f172a !important; }
-
-        body.light-mode thead {
-            background-color: #f1f5f9 !important;
-            color: #b45309 !important;
-        }
-
-        body.light-mode tbody tr:hover {
-            background-color: #f8fafc !important;
-        }
-
         body.light-mode .text-slate-400 { color: #475569 !important; }
         body.light-mode .text-slate-300 { color: #334155 !important; }
-        body.light-mode .text-slate-200 { color: #0f172a !important; }
-        body.light-mode .text-slate-100 { color: #0f172a !important; }
+        body.light-mode .text-slate-200 { color: #1e293b !important; }
         body.light-mode .text-slate-500 { color: #64748b !important; }
 
-        body.light-mode .bg-slate-950 {
-            background-color: #e2e8f0 !important;
-            border-color: #cbd5e1 !important;
-        }
-
-        body.light-mode #modal-rank-badge {
-            background-color: #fef3c7 !important;
-            border-color: #f59e0b !important;
-            color: #78350f !important;
-        }
-
-        body.light-mode .ult-dot-empty {
-            background-color: #cbd5e1 !important;
-            border-color: #94a3b8 !important;
-        }
-
-        body.light-mode ::-webkit-scrollbar-track { background: #f1f5f9; }
-        body.light-mode ::-webkit-scrollbar-thumb { background: #cbd5e1; }
-        body.light-mode ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        body.light-mode ::-webkit-scrollbar-track { background: #e2e8f0; }
+        body.light-mode ::-webkit-scrollbar-thumb { background: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between bg-slate-950 text-slate-100 overflow-x-hidden transition-colors duration-300">
+<body class="min-h-screen flex flex-col justify-between bg-slate-950 text-slate-100 overflow-x-hidden">
 
-    <header class="w-full bg-slate-900/90 backdrop-blur border-b border-slate-800 py-4 px-6 shadow-lg relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <header class="w-full bg-slate-900/80 backdrop-blur border-b border-slate-800 py-4 px-6 shadow-lg relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div class="text-center sm:text-left">
             <h1 class="text-3xl md:text-4xl font-black font-title tracking-wider bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
                 ARENA ELEMENTAL
@@ -224,16 +168,12 @@
             <p class="text-xs md:text-sm text-slate-400 font-medium">Pedra, Papel e Tesoura com Combate RPG por Turnos</p>
         </div>
 
-        <!-- Header Controls -->
+        <!-- Botões do Cabeçalho -->
         <div class="flex items-center gap-2">
-            <!-- Surrender Header Button (visible during battle) -->
-            <button onclick="openSurrenderModal()" id="btn-surrender-header" class="hidden px-3.5 py-2 bg-rose-600/20 hover:bg-rose-600/40 text-rose-300 border border-rose-600/50 active:scale-95 rounded-xl text-xs font-bold shadow transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
-                🏳️ Desistir
-            </button>
-            <button onclick="toggleRankingModal()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 rounded-xl text-xs font-bold shadow transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+            <button onclick="toggleRankingModal()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold shadow transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                 🏆 Ranking
             </button>
-            <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 border border-slate-700 rounded-xl text-xs font-semibold shadow transition-all duration-200 flex items-center gap-2 cursor-pointer">
+            <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-semibold shadow transition-all duration-200 flex items-center gap-2 cursor-pointer">
                 ☀️ Modo Claro
             </button>
         </div>
@@ -241,105 +181,180 @@
 
     <main id="app-container" class="flex-grow flex items-center justify-center p-4 md:p-6">
         
-        <!-- SCREEN 1: CLASS SELECTION -->
+        <!-- TELA 1: SELEÇÃO DE CLASSE -->
         <section id="class-select-screen" class="w-full max-w-5xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur">
             <div class="text-center mb-8">
                 <h2 class="text-2xl md:text-3xl font-bold font-title text-amber-400">Escolha sua Classe Elemental</h2>
-                <p class="text-slate-400 text-sm mt-2">Cada classe possui vantagens elementais e habilidades únicas.</p>
+                <p class="text-slate-400 text-sm mt-2">Agora com 9 elementos: Fogo, Água, Terra, Ar, Raio, Normal, Shadow, Luz e Dragão.</p>
             </div>
 
-            <!-- Class Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <!-- Fire -->
+            <!-- Grid de Seleção de Classes -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
+                <!-- Fogo -->
                 <div onclick="selectPlayerClass('fogo')" id="card-fogo" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-red-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
                     <div class="text-4xl mb-3 text-center">🔥</div>
-                    <h3 class="text-xl font-bold text-red-500 text-center font-title">Fogo</h3>
-                    <span class="block text-xs text-center text-red-400 font-semibold mb-3">Dano Alto & Fúria</span>
+                    <h3 class="text-xl font-bold text-red-400 text-center font-title">Fogo</h3>
+                    <span class="block text-xs text-center text-red-300/80 font-semibold mb-3">Dano Alto & Fúria</span>
                     <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-500 font-semibold">✓ Forte contra: <strong class="text-cyan-500">Ar (+40% Dano)</strong></li>
-                        <li class="text-rose-500 font-semibold">✗ Fraco contra: <strong class="text-blue-500">Água (-25% Dano)</strong></li>
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-cyan-300">Ar (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-blue-400">Água (-25% Dano)</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-300 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 font-medium">
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Supernova Devastadora (Atravessa escudos).
                     </div>
                 </div>
 
-                <!-- Water -->
+                <!-- Água -->
                 <div onclick="selectPlayerClass('agua')" id="card-agua" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-blue-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
                     <div class="text-4xl mb-3 text-center">💧</div>
-                    <h3 class="text-xl font-bold text-blue-500 text-center font-title">Água</h3>
-                    <span class="block text-xs text-center text-blue-400 font-semibold mb-3">Cura & Sustentação</span>
+                    <h3 class="text-xl font-bold text-blue-400 text-center font-title">Água</h3>
+                    <span class="block text-xs text-center text-blue-300/80 font-semibold mb-3">Cura & Sustentação</span>
                     <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-500 font-semibold">✓ Forte contra: <strong class="text-red-500">Fogo (+40% Dano)</strong></li>
-                        <li class="text-rose-500 font-semibold">✗ Fraco contra: <strong class="text-emerald-500">Terra (-25% Dano)</strong></li>
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-red-400">Fogo (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-emerald-400">Terra (-25% Dano)</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-300 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 font-medium">
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Tsunami Curativo (Dano + Recuperação de vida).
                     </div>
                 </div>
 
-                <!-- Earth -->
+                <!-- Terra -->
                 <div onclick="selectPlayerClass('terra')" id="card-terra" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-emerald-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
                     <div class="text-4xl mb-3 text-center">🌿</div>
-                    <h3 class="text-xl font-bold text-emerald-500 text-center font-title">Terra</h3>
-                    <span class="block text-xs text-center text-emerald-400 font-semibold mb-3">Escudo & Defesa</span>
+                    <h3 class="text-xl font-bold text-emerald-400 text-center font-title">Terra</h3>
+                    <span class="block text-xs text-center text-emerald-300/80 font-semibold mb-3">Escudo & Defesa</span>
                     <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-500 font-semibold">✓ Forte contra: <strong class="text-blue-500">Água (+40% Dano)</strong></li>
-                        <li class="text-rose-500 font-semibold">✗ Fraco contra: <strong class="text-cyan-500">Ar (-25% Dano)</strong></li>
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-blue-400">Água (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-cyan-300">Ar (-25% Dano)</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-300 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 font-medium">
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Cataclismo (Destrói escudos inimigos).
                     </div>
                 </div>
 
-                <!-- Air -->
+                <!-- Ar -->
                 <div onclick="selectPlayerClass('ar')" id="card-ar" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-cyan-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
                     <div class="text-4xl mb-3 text-center">🌪️</div>
-                    <h3 class="text-xl font-bold text-cyan-500 text-center font-title">Ar</h3>
-                    <span class="block text-xs text-center text-cyan-400 font-semibold mb-3">Velocidade & Esquiva</span>
+                    <h3 class="text-xl font-bold text-cyan-400 text-center font-title">Ar</h3>
+                    <span class="block text-xs text-center text-cyan-300/80 font-semibold mb-3">Velocidade & Esquiva</span>
                     <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-500 font-semibold">✓ Forte contra: <strong class="text-emerald-500">Terra (+40% Dano)</strong></li>
-                        <li class="text-rose-500 font-semibold">✗ Fraco contra: <strong class="text-red-500">Fogo (-25% Dano)</strong></li>
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-emerald-400">Terra (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-red-400">Fogo (-25% Dano)</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-300 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800 font-medium">
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Furacão Mortal (Dano crítico absoluto).
+                    </div>
+                </div>
+                <!-- Raio -->
+                <div onclick="selectPlayerClass('raio')" id="card-raio" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-400 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-3 text-center">⚡</div>
+                    <h3 class="text-xl font-bold text-yellow-300 text-center font-title">Raio</h3>
+                    <span class="block text-xs text-center text-yellow-200/80 font-semibold mb-3">Velocidade & Choque</span>
+                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-blue-400">Água (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-emerald-400">Terra (-25% Dano)</strong></li>
+                    </ul>
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Apocalipse Elétrico.
+                    </div>
+                </div>
+
+                <!-- Normal -->
+                <div onclick="selectPlayerClass('normal')" id="card-normal" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-stone-400 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-3 text-center">⚔️</div>
+                    <h3 class="text-xl font-bold text-stone-300 text-center font-title">Normal</h3>
+                    <span class="block text-xs text-center text-stone-300/80 font-semibold mb-3">Equilíbrio & Força</span>
+                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-purple-400">Shadow (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-orange-400">Dragão (-25% Dano)</strong></li>
+                    </ul>
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Golpe Absoluto.
+                    </div>
+                </div>
+
+                <!-- Shadow -->
+                <div onclick="selectPlayerClass('shadow')" id="card-shadow" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-purple-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-3 text-center">🌑</div>
+                    <h3 class="text-xl font-bold text-purple-400 text-center font-title">Shadow</h3>
+                    <span class="block text-xs text-center text-purple-300/80 font-semibold mb-3">Trevas & Drenagem</span>
+                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-yellow-200">Luz (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-orange-400">Dragão (-25% Dano)</strong></li>
+                    </ul>
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Eclipse Sombrio.
+                    </div>
+                </div>
+
+                <!-- Luz -->
+                <div onclick="selectPlayerClass('luz')" id="card-luz" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-200 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-3 text-center">✨</div>
+                    <h3 class="text-xl font-bold text-yellow-100 text-center font-title">Luz</h3>
+                    <span class="block text-xs text-center text-yellow-100/80 font-semibold mb-3">Cura & Purificação</span>
+                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-purple-400">Shadow (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-yellow-300">Raio (-25% Dano)</strong></li>
+                    </ul>
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Explosão Divina.
+                    </div>
+                </div>
+
+                <!-- Dragão -->
+                <div onclick="selectPlayerClass('dragao')" id="card-dragao" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-orange-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-3 text-center">🐉</div>
+                    <h3 class="text-xl font-bold text-orange-400 text-center font-title">Dragão</h3>
+                    <span class="block text-xs text-center text-orange-300/80 font-semibold mb-3">Poder & Dominação</span>
+                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
+                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-yellow-300">Raio (+40% Dano)</strong></li>
+                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-yellow-100">Luz (-25% Dano)</strong></li>
+                    </ul>
+                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Fúria do Dragão Ancestral.
                     </div>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-between bg-slate-950/50 p-4 md:p-5 rounded-xl border border-slate-800 gap-4">
+            <!-- Opções do Inimigo e Botão do Jogo -->
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-slate-950/50 p-4 rounded-xl border border-slate-800 gap-4">
                 <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                    <!-- Player Name Input -->
-                    <div class="flex items-center gap-2.5 w-full sm:w-auto">
-                        <label for="player-name-input" class="text-xs font-bold text-slate-300 whitespace-nowrap">Seu Nome:</label>
-                        <input type="text" id="player-name-input" value="Lutador Elemental" maxlength="15" placeholder="Digite seu nome..." class="bg-slate-800 border-2 border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-500 outline-none w-full sm:w-44 transition-all">
+                    <!-- Campo de Nome do Jogador -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-semibold text-slate-400">Seu Nome:</label>
+                        <input type="text" id="player-name-input" value="Lutador Elemental" maxlength="15" class="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none w-36">
                     </div>
 
-                    <div class="flex items-center gap-2.5 w-full sm:w-auto">
-                        <label for="cpu-class-select" class="text-xs font-bold text-slate-300 whitespace-nowrap">Oponente:</label>
-                        <select id="cpu-class-select" class="bg-slate-800 border-2 border-slate-700 text-slate-100 font-bold text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-amber-500 outline-none cursor-pointer w-full sm:w-auto transition-all">
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-semibold text-slate-400">Classe Inimiga:</label>
+                        <select id="cpu-class-select" class="bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg p-2 focus:ring-2 focus:ring-amber-500 outline-none">
                             <option value="random">🔮 Aleatório</option>
                             <option value="fogo">🔥 Fogo</option>
                             <option value="agua">💧 Água</option>
                             <option value="terra">🌿 Terra</option>
                             <option value="ar">🌪️ Ar</option>
+                            <option value="raio">⚡ Raio</option>
+                            <option value="normal">⚔️ Normal</option>
+                            <option value="shadow">🌑 Shadow</option>
+                            <option value="luz">✨ Luz</option>
+                            <option value="dragao">🐉 Dragão</option>
                         </select>
                     </div>
                 </div>
                 
-                <button onclick="startGame()" id="btn-start-game" disabled class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold font-title rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95 cursor-pointer">
+                <button onclick="startGame()" id="btn-start-game" disabled class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold font-title rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105 cursor-pointer">
                     Entrar na Arena ⚔️
                 </button>
             </div>
         </section>
 
-        <!-- SCREEN 2: BATTLE ARENA (Hidden Initially) -->
+        <!-- TELA 2: ARENA DE BATALHA (Inicialmente Oculta) -->
         <section id="battle-screen" class="hidden w-full max-w-6xl flex flex-col gap-6">
             
-            <!-- Fighters Cards Panel -->
+            <!-- Painel de Lutadores -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
                 
-                <!-- Middle VS Indicator -->
+                <!-- Indicador de VS do Meio -->
                 <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-900 border-2 border-amber-500/50 items-center justify-center font-title font-black text-amber-400 shadow-xl z-20">
                     VS
                 </div>
@@ -355,51 +370,51 @@
                             </div>
                         </div>
                         
-                        <!-- Ultimate Charges -->
+                        <!-- Status de Cargas Supremas (5 Vitórias para Ult) -->
                         <div class="flex flex-col items-end">
                             <span class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Energia Suprema</span>
                             <div id="player-ult-tracker" class="flex gap-1 mt-1">
-                                <!-- Filled dynamically in JS -->
+                                <!-- Preenchido dinamicamente no JS -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Player HP Bar -->
+                    <!-- Barra de Vida Player -->
                     <div class="mb-2">
-                        <div class="flex justify-between text-xs font-bold mb-1">
+                        <div class="flex justify-between text-xs font-semibold mb-1">
                             <span class="text-slate-300">Vida (HP)</span>
-                            <span id="player-hp-text" class="text-emerald-500 font-extrabold">250 / 250</span>
+                            <span id="player-hp-text" class="text-emerald-400">250 / 250</span>
                         </div>
                         <div class="w-full h-4 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800 relative">
                             <div id="player-hp-bar" class="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all duration-500 w-full"></div>
                         </div>
                     </div>
 
-                    <!-- Player Shield Bar -->
+                    <!-- Barra de Escudo Player -->
                     <div>
-                        <div class="flex justify-between text-[11px] font-bold mb-1">
-                            <span class="text-cyan-400 flex items-center gap-1">🛡️️ Escudo</span>
-                            <span id="player-shield-text" class="text-cyan-500">0</span>
+                        <div class="flex justify-between text-[11px] font-semibold mb-1">
+                            <span class="text-cyan-300 flex items-center gap-1">🛡️ Escudo</span>
+                            <span id="player-shield-text" class="text-cyan-400">0</span>
                         </div>
                         <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
                             <div id="player-shield-bar" class="h-full bg-cyan-400 rounded-full transition-all duration-300 w-0"></div>
                         </div>
                     </div>
 
-                    <!-- Active Buffs -->
+                    <!-- Buffs Ativos -->
                     <div id="player-buffs" class="flex gap-2 mt-3 min-h-[24px]">
-                        <!-- Buff badges appended here -->
+                        <!-- Badges de buff entram aqui -->
                     </div>
                 </div>
 
                 <!-- CPU CARD -->
                 <div id="cpu-card" class="relative bg-slate-900/90 border-2 border-slate-800 rounded-2xl p-5 shadow-xl backdrop-blur overflow-hidden transition-all duration-300">
                     <div class="flex items-center justify-between mb-3">
-                        <!-- Ultimate Charges CPU -->
+                        <!-- Status de Cargas Supremas CPU -->
                         <div class="flex flex-col items-start">
                             <span class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Energia Suprema</span>
                             <div id="cpu-ult-tracker" class="flex gap-1 mt-1">
-                                <!-- Filled dynamically in JS -->
+                                <!-- Preenchido dinamicamente no JS -->
                             </div>
                         </div>
 
@@ -412,10 +427,10 @@
                         </div>
                     </div>
 
-                    <!-- CPU HP Bar -->
+                    <!-- Barra de Vida CPU -->
                     <div class="mb-2">
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span id="cpu-hp-text" class="text-emerald-500 font-extrabold">250 / 250</span>
+                        <div class="flex justify-between text-xs font-semibold mb-1">
+                            <span id="cpu-hp-text" class="text-emerald-400">250 / 250</span>
                             <span class="text-slate-300">Vida (HP)</span>
                         </div>
                         <div class="w-full h-4 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
@@ -423,35 +438,35 @@
                         </div>
                     </div>
 
-                    <!-- CPU Shield Bar -->
+                    <!-- Barra de Escudo CPU -->
                     <div>
-                        <div class="flex justify-between text-[11px] font-bold mb-1">
-                            <span id="cpu-shield-text" class="text-cyan-500">0</span>
-                            <span class="text-cyan-400 flex items-center gap-1">Escudo 🛡️</span>
+                        <div class="flex justify-between text-[11px] font-semibold mb-1">
+                            <span id="cpu-shield-text" class="text-cyan-400">0</span>
+                            <span class="text-cyan-300 flex items-center gap-1">Escudo 🛡️</span>
                         </div>
                         <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-slate-800">
                             <div id="cpu-shield-bar" class="h-full bg-cyan-400 rounded-full transition-all duration-300 w-0 ml-auto"></div>
                         </div>
                     </div>
 
-                    <!-- Active Buffs CPU -->
+                    <!-- Buffs Ativos CPU -->
                     <div id="cpu-buffs" class="flex gap-2 mt-3 min-h-[24px] justify-end">
-                        <!-- Buff badges appended here -->
+                        <!-- Badges de buff entram aqui -->
                     </div>
                 </div>
             </div>
 
-            <!-- CENTRAL COMBAT CONTROLS -->
-            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur text-center flex flex-col items-center relative">
+            <!-- PAINEL CENTRAL DE JOGO -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl backdrop-blur text-center flex flex-col items-center">
                 
-                <!-- Status Banner -->
-                <div id="round-status-banner" class="w-full py-2.5 px-4 bg-slate-950 rounded-xl border border-slate-800 text-amber-300 font-bold text-sm md:text-base mb-6 animate-pulse">
+                <!-- Status do Turno / Banner de Anúncio -->
+                <div id="round-status-banner" class="w-full py-2 px-4 bg-slate-950 rounded-xl border border-slate-800 text-amber-300 font-bold text-sm md:text-base mb-6 animate-pulse">
                     Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!
                 </div>
 
-                <!-- ROCK PAPER SCISSORS CONTROLS -->
+                <!-- ÁREA DE PEDRA, PAPEL E TESOURA (Com Confirmação) -->
                 <div id="rps-controls" class="w-full max-w-lg">
-                    <p class="text-xs uppercase tracking-widest text-slate-400 font-bold mb-4">Selecione seu Movimento</p>
+                    <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-4">Selecione seu Movimento</p>
                     
                     <div class="grid grid-cols-3 gap-4 mb-5">
                         <button onclick="selectRPS('pedra')" id="rps-btn-pedra" class="rps-btn flex flex-col items-center justify-center p-4 bg-slate-800 hover:bg-slate-700 border-2 border-slate-700 hover:border-amber-500 rounded-2xl transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0 group cursor-pointer">
@@ -468,96 +483,89 @@
                         </button>
                     </div>
 
-                    <!-- RPS Confirm Button -->
+                    <!-- Botão de Confirmação para Pedra, Papel ou Tesoura -->
                     <button onclick="confirmRPS()" id="btn-confirm-rps" disabled class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold font-title rounded-xl shadow-lg transition-all duration-200 transform active:scale-95 cursor-pointer">
                         Confirmar Escolha ⚔️
                     </button>
                 </div>
 
-                <!-- SKILL SELECTION PANEL -->
+                <!-- PAINEL DE SELEÇÃO DE HABILIDADES (Com Confirmação) -->
                 <div id="skill-controls" class="hidden w-full max-w-4xl">
-                    <div class="text-emerald-500 font-bold text-sm mb-3">
+                    <div class="text-emerald-400 font-bold text-sm mb-3">
                         🎉 Você venceu a rodada de PPT! Selecione uma habilidade e confirme para atacar:
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2.5 mb-5">
-                        <!-- Skill 0: Quick Attack -->
+                        <!-- Skill 0: Ataque Rápido -->
                         <button onclick="selectSkill(0)" id="skill-btn-0" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-yellow-400 rounded-xl text-left transition-all cursor-pointer">
-                            <span class="font-bold text-xs text-yellow-500 flex items-center justify-between">
+                            <span class="font-bold text-xs text-yellow-400 flex items-center justify-between">
                                 <span id="skill-name-0">Rápido</span> ⚡
                             </span>
-                            <span id="skill-desc-0" class="text-[10px] text-slate-300 mt-1 leading-tight font-medium">Dano rápido e ágil.</span>
+                            <span id="skill-desc-0" class="text-[10px] text-slate-300 mt-1 leading-tight">Dano rápido e ágil.</span>
                         </button>
 
-                        <!-- Skill 1: Normal Attack -->
+                        <!-- Skill 1: Ataque Normal -->
                         <button onclick="selectSkill(1)" id="skill-btn-1" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-emerald-500 rounded-xl text-left transition-all cursor-pointer">
-                            <span class="font-bold text-xs text-emerald-500 flex items-center justify-between">
+                            <span class="font-bold text-xs text-emerald-400 flex items-center justify-between">
                                 <span id="skill-name-1">Normal</span> ⚔️
                             </span>
-                            <span id="skill-desc-1" class="text-[10px] text-slate-300 mt-1 leading-tight font-medium">Dano médio equilibrado.</span>
+                            <span id="skill-desc-1" class="text-[10px] text-slate-300 mt-1 leading-tight">Dano médio equilibrado.</span>
                         </button>
 
-                        <!-- Skill 2: Heavy Attack -->
+                        <!-- Skill 2: Ataque Pesado (Demorado / Cooldown) -->
                         <button onclick="selectSkill(2)" id="skill-btn-2" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-red-500 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                            <span class="font-bold text-xs text-red-500 flex items-center justify-between">
+                            <span class="font-bold text-xs text-red-400 flex items-center justify-between">
                                 <span id="skill-name-2">Pesado</span> 💥
                             </span>
-                            <span id="skill-desc-2" class="text-[10px] text-slate-300 mt-1 leading-tight font-medium">Alto dano (2 turnos recarga).</span>
+                            <span id="skill-desc-2" class="text-[10px] text-slate-300 mt-1 leading-tight">Alto dano (2 turnos recarga).</span>
                         </button>
 
-                        <!-- Skill 3: Support -->
+                        <!-- Skill 3: Suporte / Escudo / Cura -->
                         <button onclick="selectSkill(3)" id="skill-btn-3" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                            <span class="font-bold text-xs text-blue-500 flex items-center justify-between">
+                            <span class="font-bold text-xs text-blue-400 flex items-center justify-between">
                                 <span id="skill-name-3">Suporte</span> 🛡️
                             </span>
-                            <span id="skill-desc-3" class="text-[10px] text-slate-300 mt-1 leading-tight font-medium">Efeito de utilidade.</span>
+                            <span id="skill-desc-3" class="text-[10px] text-slate-300 mt-1 leading-tight">Efeito de utilidade.</span>
                         </button>
 
-                        <!-- Skill 4: ULTIMATE -->
+                        <!-- Skill 4: SUPREMA (Exige 5 Vitórias) -->
                         <button onclick="selectSkill(4)" id="skill-btn-4" disabled class="skill-btn flex flex-col p-2.5 bg-slate-800 border border-slate-800 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                            <span class="font-bold text-xs text-amber-500 flex items-center justify-between">
+                            <span class="font-bold text-xs text-amber-400 flex items-center justify-between">
                                 <span id="skill-name-4">SUPREMA</span> 🌟
                             </span>
-                            <span id="skill-desc-4" class="text-[10px] text-slate-300 mt-1 leading-tight font-medium">Requer 5 vitórias!</span>
+                            <span id="skill-desc-4" class="text-[10px] text-slate-300 mt-1 leading-tight">Requer 5 vitórias!</span>
                         </button>
                     </div>
 
-                    <!-- Skill Confirm Button -->
+                    <!-- Botão de Confirmação para Poder / Habilidade -->
                     <button onclick="confirmSkill()" id="btn-confirm-skill" disabled class="w-full md:w-auto px-10 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-40 disabled:cursor-not-allowed text-slate-950 font-bold font-title rounded-xl shadow-lg transition-all duration-200 transform active:scale-95 cursor-pointer">
                         Confirmar Habilidade 💥
                     </button>
                 </div>
-
-                <!-- Bottom In-Arena Surrender Trigger -->
-                <div class="mt-4 pt-3 border-t border-slate-800/80 w-full flex justify-end">
-                    <button onclick="openSurrenderModal()" class="text-xs text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1 hover:underline cursor-pointer">
-                        🏳️ Abandonar Partida (Desistir)
-                    </button>
-                </div>
             </div>
 
-            <!-- COMBAT LOG -->
+            <!-- LOG DE COMBATE -->
             <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl backdrop-blur">
                 <h4 class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-2 flex items-center gap-2">
                     📜 Histórico da Batalha
                 </h4>
-                <div id="combat-log" class="h-28 overflow-y-auto text-xs space-y-1.5 p-2.5 bg-slate-950 rounded-lg border border-slate-800/80 font-mono">
+                <div id="combat-log" class="h-28 overflow-y-auto text-xs space-y-1.5 p-2 bg-slate-950 rounded-lg border border-slate-800/80 font-mono">
                     <p class="text-slate-500 italic">O combate começou! Faça sua primeira jogada.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- GAME OVER MODAL -->
+    <!-- MODAL FIM DE JOGO (VITÓRIA / DERROTA) -->
     <div id="game-over-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
             <div id="modal-icon" class="text-6xl mb-4">🏆</div>
             <h2 id="modal-title" class="text-3xl font-black font-title mb-2">Vitória!</h2>
             <p id="modal-desc" class="text-slate-300 text-sm mb-4">Você superou o oponente elemental com maestria!</p>
 
-            <!-- Ranking Score Badge -->
-            <div id="modal-rank-badge" class="hidden mb-6 p-3 bg-amber-950/60 border border-amber-500/50 rounded-xl text-amber-300 text-xs font-semibold">
-                <!-- Filled dynamically via JS -->
+            <!-- Detalhes do Ranking do Jogador -->
+            <div id="modal-rank-badge" class="hidden mb-6 p-3 bg-amber-950/60 border border-amber-500/50 rounded-xl text-amber-300 text-xs">
+                <!-- Preenchido dinamicamente via JS -->
             </div>
             
             <div class="flex flex-col gap-2">
@@ -571,27 +579,7 @@
         </div>
     </div>
 
-    <!-- SURRENDER CONFIRMATION MODAL -->
-    <div id="surrender-modal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
-        <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl relative overflow-hidden">
-            <div class="text-5xl mb-3">🏳️</div>
-            <h3 class="text-2xl font-black font-title text-amber-400 mb-2">Desistir da Batalha?</h3>
-            <p class="text-slate-300 text-xs mb-6 leading-relaxed font-medium">
-                Tem certeza que deseja levantar a bandeira branca? Você declarará derrota imediata na arena.
-            </p>
-            
-            <div class="flex items-center justify-center gap-3">
-                <button onclick="closeSurrenderModal()" class="w-1/2 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all cursor-pointer">
-                    Cancelar
-                </button>
-                <button onclick="confirmSurrender()" class="w-1/2 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs shadow-lg transition-all cursor-pointer">
-                    Sim, Desistir 🏳️
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- RANKING MODAL -->
+    <!-- MODAL DO RANKING -->
     <div id="ranking-modal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-6 max-w-lg w-full shadow-2xl relative max-h-[90vh] flex flex-col">
             <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
@@ -601,8 +589,8 @@
                 <button onclick="toggleRankingModal()" class="text-slate-400 hover:text-slate-100 text-xl font-bold px-2 cursor-pointer">✕</button>
             </div>
             
-            <p class="text-xs text-slate-400 mb-4 font-medium">
-                A ordem no ranking é definida pela <strong>Vida Restante (HP)</strong> das pessoas reais que venceram na arena. Quanto mais vida sobrou, maior a posição!
+            <p class="text-xs text-slate-400 mb-4">
+                A ordem no ranking é definida pela <strong>Vida Restante (HP)</strong> no momento em que venceu. Quanto mais vida sobrou, maior a posição!
             </p>
 
             <div class="overflow-y-auto flex-grow pr-1">
@@ -615,16 +603,13 @@
                             <th class="p-2.5 text-right rounded-r-lg">HP Sobrando</th>
                         </tr>
                     </thead>
-                    <tbody id="ranking-table-body" class="divide-y divide-slate-800/60 font-semibold">
-                        <!-- Filled dynamically via JS -->
+                    <tbody id="ranking-table-body" class="divide-y divide-slate-800/60 font-medium">
+                        <!-- Preenchido dinamicamente via JS -->
                     </tbody>
                 </table>
             </div>
 
-            <div class="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
-                <button onclick="clearRankingHistory()" class="px-4 py-2 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800 rounded-xl text-xs font-semibold transition-all cursor-pointer">
-                    🗑️ Limpar Histórico
-                </button>
+            <div class="mt-5 pt-3 border-t border-slate-800 text-center">
                 <button onclick="toggleRankingModal()" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all cursor-pointer">
                     Fechar
                 </button>
@@ -633,12 +618,12 @@
     </div>
 
     <script>
-        // CLASSES & SKILLS DATABASE
+        // BASE DE DADOS DAS CLASSES E HABILIDADES
         const CLASSES = {
             fogo: {
                 name: "Fogo",
                 avatar: "🔥",
-                color: "text-red-500",
+                color: "text-red-400",
                 badgeBg: "bg-red-950/60 text-red-400 border border-red-800",
                 strongAgainst: "ar",
                 weakAgainst: "agua",
@@ -682,7 +667,7 @@
             agua: {
                 name: "Água",
                 avatar: "💧",
-                color: "text-blue-500",
+                color: "text-blue-400",
                 badgeBg: "bg-blue-950/60 text-blue-400 border border-blue-800",
                 strongAgainst: "fogo",
                 weakAgainst: "terra",
@@ -726,7 +711,7 @@
             terra: {
                 name: "Terra",
                 avatar: "🌿",
-                color: "text-emerald-500",
+                color: "text-emerald-400",
                 badgeBg: "bg-emerald-950/60 text-emerald-400 border border-emerald-800",
                 strongAgainst: "agua",
                 weakAgainst: "ar",
@@ -770,7 +755,7 @@
             ar: {
                 name: "Ar",
                 avatar: "🌪️",
-                color: "text-cyan-500",
+                color: "text-cyan-400",
                 badgeBg: "bg-cyan-950/60 text-cyan-400 border border-cyan-800",
                 strongAgainst: "terra",
                 weakAgainst: "fogo",
@@ -809,10 +794,85 @@
                         desc: "Ataque crítico avassalador de 72 de dano!"
                     }
                 ]
+            },
+            raio: {
+                name: "Raio",
+                avatar: "⚡",
+                color: "text-yellow-300",
+                badgeBg: "bg-yellow-950/60 text-yellow-300 border border-yellow-800",
+                strongAgainst: "agua",
+                weakAgainst: "terra",
+                skills: [
+                    { name: "Faísca Rápida", type: "damage", power: 15, bonusUlt: true, desc: "Raio veloz (15) +1 Carga Suprema extra." },
+                    { name: "Descarga Elétrica", type: "damage", power: 25, desc: "Ataque elétrico de 25 de dano." },
+                    { name: "Trovão Celestial", type: "damage", power: 48, cooldownMax: 2, desc: "Grande descarga de 48 de dano." },
+                    { name: "Campo Magnético", type: "buff", buffType: "evasion", cooldownMax: 1, desc: "Cria um campo que esquiva do próximo ataque." },
+                    { name: "APOCALIPSE ELÉTRICO", type: "ultimate", power: 76, pierceShield: true, desc: "Relâmpago devastador de 76 que atravessa escudos." }
+                ]
+            },
+            normal: {
+                name: "Normal",
+                avatar: "⚔️",
+                color: "text-stone-300",
+                badgeBg: "bg-stone-800/70 text-stone-300 border border-stone-600",
+                strongAgainst: "shadow",
+                weakAgainst: "dragao",
+                skills: [
+                    { name: "Investida", type: "damage", power: 14, bonusUlt: true, desc: "Ataque físico rápido (14) +1 Carga Suprema." },
+                    { name: "Golpe Preciso", type: "damage", power: 24, desc: "Ataque equilibrado de 24 de dano." },
+                    { name: "Impacto Brutal", type: "damage", power: 46, cooldownMax: 2, desc: "Golpe pesado de 46 de dano." },
+                    { name: "Postura de Combate", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano no próximo ataque." },
+                    { name: "GOLPE ABSOLUTO", type: "ultimate", power: 70, breakShield: true, desc: "Ataque físico de 70 que destrói o escudo inimigo." }
+                ]
+            },
+            shadow: {
+                name: "Shadow",
+                avatar: "🌑",
+                color: "text-purple-400",
+                badgeBg: "bg-purple-950/60 text-purple-400 border border-purple-800",
+                strongAgainst: "luz",
+                weakAgainst: "dragao",
+                skills: [
+                    { name: "Sombra Rápida", type: "damage", power: 14, ignoreEvasion: true, desc: "Ataque sombrio (14) que ignora esquiva." },
+                    { name: "Lâmina Sombria", type: "damage", power: 25, desc: "Corte das trevas de 25 de dano." },
+                    { name: "Abismo Negro", type: "damage", power: 47, cooldownMax: 2, desc: "Ataque sombrio de 47 de dano." },
+                    { name: "Roubo de Sombra", type: "heal", healVal: 34, cooldownMax: 1, desc: "Drena energia e recupera 34 HP." },
+                    { name: "ECLIPSE SOMBRIO", type: "ultimate", power: 74, healVal: 25, desc: "Causa 74 de dano e recupera 25 HP." }
+                ]
+            },
+            luz: {
+                name: "Luz",
+                avatar: "✨",
+                color: "text-yellow-100",
+                badgeBg: "bg-yellow-950/50 text-yellow-100 border border-yellow-700",
+                strongAgainst: "shadow",
+                weakAgainst: "raio",
+                skills: [
+                    { name: "Raio Luminoso", type: "damage", power: 13, bonusUlt: true, desc: "Ataque de luz (13) +1 Carga Suprema." },
+                    { name: "Lança Solar", type: "damage", power: 24, desc: "Energia solar de 24 de dano." },
+                    { name: "Explosão Celestial", type: "damage", power: 45, cooldownMax: 2, desc: "Explosão sagrada de 45 de dano." },
+                    { name: "Bênção Divina", type: "heal", healVal: 42, cooldownMax: 1, desc: "Recupera 42 HP com energia luminosa." },
+                    { name: "EXPLOSÃO DIVINA", type: "ultimate", power: 72, pierceShield: true, desc: "Luz absoluta: 72 de dano atravessando escudos." }
+                ]
+            },
+            dragao: {
+                name: "Dragão",
+                avatar: "🐉",
+                color: "text-orange-400",
+                badgeBg: "bg-orange-950/60 text-orange-400 border border-orange-800",
+                strongAgainst: "raio",
+                weakAgainst: "luz",
+                skills: [
+                    { name: "Garra Dracônica", type: "damage", power: 16, bonusUlt: true, desc: "Garra veloz (16) +1 Carga Suprema." },
+                    { name: "Sopro Dracônico", type: "damage", power: 27, desc: "Chama ancestral de 27 de dano." },
+                    { name: "Mordida Colossal", type: "damage", power: 50, cooldownMax: 2, desc: "Ataque brutal de 50 de dano." },
+                    { name: "Escamas Ancestrais", type: "shield", shieldVal: 42, cooldownMax: 1, desc: "Ganha 42 de escudo." },
+                    { name: "FÚRIA DO DRAGÃO ANCESTRAL", type: "ultimate", power: 80, breakShield: true, desc: "Poder ancestral: 80 de dano e destrói o escudo." }
+                ]
             }
         };
 
-        // GLOBAL GAME STATE
+        // ESTADO GLOBAL DO JOGO
         let state = {
             playerName: "Lutador",
             player: {
@@ -837,13 +897,17 @@
             },
             currentPhase: 'SELECTION',
             roundCount: 1,
-            surrendered: false,
-            rankings: JSON.parse(localStorage.getItem('arena_elemental_rankings')) || []
+            rankings: [
+                { name: "Mestre Ignis", classKey: "fogo", hpRemaining: 230, maxHp: 250, rounds: 6 },
+                { name: "Sábia Aqualis", classKey: "agua", hpRemaining: 190, maxHp: 250, rounds: 8 },
+                { name: "Guardião Terran", classKey: "terra", hpRemaining: 150, maxHp: 250, rounds: 10 },
+                { name: "Vento Celestial", classKey: "ar", hpRemaining: 90, maxHp: 250, rounds: 12 }
+            ]
         };
 
         const WINS_REQUIRED_FOR_ULT = 5;
 
-        // Temporary selections
+        // Variaveis de Seleção Temporária
         let selectedRpsChoice = null;
         let selectedSkillIndex = null;
 
@@ -851,11 +915,11 @@
             state.player.classKey = classKey;
             
             document.querySelectorAll('.class-card').forEach(card => {
-                card.classList.remove('border-amber-500', 'ring-2', 'ring-amber-500');
+                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
             });
             const selectedCard = document.getElementById(`card-${classKey}`);
             if (selectedCard) {
-                selectedCard.classList.add('border-amber-500', 'ring-2', 'ring-amber-500');
+                selectedCard.classList.add('border-amber-400', 'ring-2', 'ring-amber-400');
             }
 
             document.getElementById('btn-start-game').disabled = false;
@@ -865,7 +929,7 @@
             if (!state.player.classKey) return;
 
             const nameInput = document.getElementById('player-name-input').value.trim();
-            state.playerName = nameInput || "Lutador Elemental";
+            state.playerName = nameInput || "Lutador";
 
             const cpuSelectVal = document.getElementById('cpu-class-select').value;
             if (cpuSelectVal === 'random') {
@@ -877,12 +941,10 @@
 
             document.getElementById('class-select-screen').classList.add('hidden');
             document.getElementById('battle-screen').classList.remove('hidden');
-            document.getElementById('btn-surrender-header').classList.remove('hidden');
 
             setupBattlefield();
             state.currentPhase = 'RPS';
-            state.surrendered = false;
-            logMessage(`⚔️ A Batalha começou! Combate até a morte (250 HP).`, 'text-amber-400 font-bold');
+            logMessage(`⚔️ A Batalha começou! Combate até a morte (250 HP).`, 'text-amber-400');
         }
 
         function setupBattlefield() {
@@ -903,7 +965,7 @@
             cBadge.innerText = cClass.name;
             cBadge.className = `inline-block text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${cClass.badgeBg}`;
 
-            // Skill labels and descriptions
+            // Nomes e descrições dos botões de habilidade
             pClass.skills.forEach((sk, idx) => {
                 const nameEl = document.getElementById(`skill-name-${idx}`);
                 const descEl = document.getElementById(`skill-desc-${idx}`);
@@ -921,6 +983,7 @@
             }
         }
 
+        // SELEÇÃO E CONFIRMAÇÃO DE PEDRA, PAPEL OU TESOURA
         function selectRPS(choice) {
             if (state.currentPhase !== 'RPS') return;
             selectedRpsChoice = choice;
@@ -931,11 +994,11 @@
             choices.forEach(c => {
                 const btn = document.getElementById(`rps-btn-${c}`);
                 if (c === choice) {
-                    btn.classList.add('border-amber-500', 'ring-2', 'ring-amber-500');
-                    btn.classList.remove('border-slate-700');
+                    btn.classList.add('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
+                    btn.classList.remove('border-slate-700', 'bg-slate-800');
                 } else {
-                    btn.classList.remove('border-amber-500', 'ring-2', 'ring-amber-500');
-                    btn.classList.add('border-slate-700');
+                    btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
+                    btn.classList.add('border-slate-700', 'bg-slate-800');
                 }
             });
 
@@ -949,17 +1012,19 @@
 
             const choice = selectedRpsChoice;
 
+            // Resetar visual de seleção do RPS
             selectedRpsChoice = null;
             ['pedra', 'papel', 'tesoura'].forEach(c => {
                 const btn = document.getElementById(`rps-btn-${c}`);
-                btn.classList.remove('border-amber-500', 'ring-2', 'ring-amber-500');
-                btn.classList.add('border-slate-700');
+                btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
+                btn.classList.add('border-slate-700', 'bg-slate-800');
             });
 
             const confirmBtn = document.getElementById('btn-confirm-rps');
             confirmBtn.disabled = true;
             confirmBtn.innerText = 'Confirmar Escolha ⚔️';
 
+            // Executar a jogada
             playRPS(choice);
         }
 
@@ -985,13 +1050,13 @@
                 state.currentPhase = 'SKILL_SELECT';
                 
                 updateStatusBanner("🎉 Você VENCEU no PPT! Escolha um Poder e clique em Confirmar Habilidade!");
-                logMessage(`-> Vitória no PPT! (+1 Carga Suprema: ${state.player.ultWins}/${WINS_REQUIRED_FOR_ULT})`, 'text-emerald-500 font-semibold');
+                logMessage(`-> Vitória no PPT! (+1 Carga Suprema: ${state.player.ultWins}/${WINS_REQUIRED_FOR_ULT})`, 'text-emerald-400');
                 
                 showSkillPanel(true);
             } else {
                 state.cpu.ultWins++;
                 updateStatusBanner("⚡ O Inimigo VENCEU a rodada de PPT e está preparando uma habilidade!");
-                logMessage(`-> O Inimigo venceu a rodada! (+1 Carga Suprema Inimiga)`, 'text-rose-500 font-semibold');
+                logMessage(`-> O Inimigo venceu a rodada! (+1 Carga Suprema Inimiga)`, 'text-rose-400');
                 
                 showSkillPanel(false);
                 
@@ -1003,12 +1068,14 @@
             updateUI();
         }
 
+        // SELEÇÃO E CONFIRMAÇÃO DE PODER / HABILIDADE
         function selectSkill(index) {
             if (state.currentPhase !== 'SKILL_SELECT') return;
 
             const pClass = CLASSES[state.player.classKey];
             const skill = pClass.skills[index];
 
+            // Não selecionar se estiver em cooldown ou se a suprema não estiver carregada
             if (state.player.cooldowns[index] > 0) return;
             if (skill.type === 'ultimate' && state.player.ultWins < WINS_REQUIRED_FOR_ULT) return;
 
@@ -1017,9 +1084,9 @@
             pClass.skills.forEach((_, idx) => {
                 const btn = document.getElementById(`skill-btn-${idx}`);
                 if (idx === index) {
-                    btn.classList.add('ring-2', 'ring-amber-500', 'border-amber-500');
+                    btn.classList.add('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
                 } else {
-                    btn.classList.remove('ring-2', 'ring-amber-500', 'border-amber-500');
+                    btn.classList.remove('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
                 }
             });
 
@@ -1033,11 +1100,12 @@
 
             const index = selectedSkillIndex;
 
+            // Limpar estado de seleção
             selectedSkillIndex = null;
             const pClass = CLASSES[state.player.classKey];
             pClass.skills.forEach((_, idx) => {
                 const btn = document.getElementById(`skill-btn-${idx}`);
-                btn.classList.remove('ring-2', 'ring-amber-500', 'border-amber-500');
+                btn.classList.remove('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
             });
 
             const confirmBtn = document.getElementById('btn-confirm-skill');
@@ -1080,17 +1148,18 @@
 
         function executeCpuTurn() {
             const cpuClass = CLASSES[state.cpu.classKey];
-            let chosenSkillIndex = 1;
+            let chosenSkillIndex = 1; // Padrão: Ataque Normal
 
+            // IA Inteligente da CPU
             if (state.cpu.ultWins >= WINS_REQUIRED_FOR_ULT) {
-                chosenSkillIndex = 4;
+                chosenSkillIndex = 4; // Suprema
                 state.cpu.ultWins -= WINS_REQUIRED_FOR_ULT;
             } else if (state.cpu.cooldowns[2] === 0 && Math.random() < 0.45) {
-                chosenSkillIndex = 2;
+                chosenSkillIndex = 2; // Ataque Pesado
             } else if (state.cpu.hp < 90 && state.cpu.cooldowns[3] === 0 && Math.random() < 0.6) {
-                chosenSkillIndex = 3;
+                chosenSkillIndex = 3; // Suporte (Cura / Escudo)
             } else if (Math.random() < 0.4) {
-                chosenSkillIndex = 0;
+                chosenSkillIndex = 0; // Ataque Rápido
             }
 
             const skill = cpuClass.skills[chosenSkillIndex];
@@ -1115,13 +1184,15 @@
             const targetName = targetKey === 'player' ? "Você" : "O Inimigo";
             const targetCardId = targetKey === 'player' ? 'player-card' : 'cpu-card';
 
+            // Esquiva
             if (target.evasionBuff && !skill.ignoreEvasion && skill.type !== 'heal' && skill.type !== 'shield' && skill.type !== 'buff') {
                 target.evasionBuff = false;
-                logMessage(`💨 ${targetName} ativou Esquiva e DESVIOU completamente do ataque!`, 'text-cyan-500 font-bold');
-                showDamagePopup(targetCardId, "ESQUIVOU!", "text-cyan-500");
+                logMessage(`💨 ${targetName} ativou Esquiva e DESVIOU completamente do ataque!`, 'text-cyan-300');
+                showDamagePopup(targetCardId, "ESQUIVOU!", "text-cyan-400");
                 return;
             }
 
+            // DANO
             if (skill.type === 'damage' || skill.type === 'ultimate') {
                 let basePower = skill.power || 0;
                 const elem = calculateElementalMultiplier(caster.classKey, target.classKey);
@@ -1130,12 +1201,12 @@
                 if (caster.nextDmgBuff) {
                     finalDamage = Math.round(finalDamage * 1.6);
                     caster.nextDmgBuff = false;
-                    logMessage(`🔥 Bônus de Dano ativado (+60% de Dano extra)!`, 'text-orange-500 font-bold');
+                    logMessage(`🔥 Bônus de Dano ativado (+60% de Dano extra)!`, 'text-orange-400');
                 }
 
                 if (skill.breakShield && target.shield > 0) {
                     target.shield = 0;
-                    logMessage(`💥 O Cataclismo pulverizou todo o escudo de ${targetName}!`, 'text-amber-500 font-bold');
+                    logMessage(`💥 O Cataclismo pulverizou todo o escudo de ${targetName}!`, 'text-amber-400');
                 }
 
                 let actualDmgToHp = finalDamage;
@@ -1154,64 +1225,48 @@
                 triggerShake(targetCardId);
                 showDamagePopup(targetCardId, `-${finalDamage}`, 'text-red-500');
 
-                logMessage(`⚔️ ${casterName} usou [${skill.name}] causando ${finalDamage} de dano em ${targetName}${elem.text}!`, elem.type === 'strong' ? 'text-emerald-500 font-bold' : 'text-slate-200');
+                logMessage(`⚔️ ${casterName} usou [${skill.name}] causando ${finalDamage} de dano em ${targetName}${elem.text}!`, elem.type === 'strong' ? 'text-emerald-300' : 'text-slate-200');
 
                 if (skill.bonusUlt) {
                     caster.ultWins = Math.min(WINS_REQUIRED_FOR_ULT, caster.ultWins + 1);
-                    logMessage(`⚡ ${casterName} ganhou +1 de Carga Suprema bônus com o Ataque Rápido!`, 'text-yellow-500 font-bold');
+                    logMessage(`⚡ ${casterName} ganhou +1 de Carga Suprema bônus com o Ataque Rápido!`, 'text-yellow-300');
                 }
 
                 if (skill.addShield) {
                     caster.shield += skill.addShield;
-                    logMessage(`🛡️ ${casterName} ganhou +${skill.addShield} de escudo adicional!`, 'text-cyan-500 font-bold');
+                    logMessage(`🛡️ ${casterName} ganhou +${skill.addShield} de escudo adicional!`, 'text-cyan-300');
                 }
 
                 if (skill.healVal) {
                     caster.hp = Math.min(caster.maxHp, caster.hp + skill.healVal);
-                    logMessage(`💧 ${casterName} recuperou +${skill.healVal} de HP!`, 'text-blue-500 font-bold');
+                    logMessage(`💧 ${casterName} recuperou +${skill.healVal} de HP!`, 'text-blue-300');
                 }
             }
 
+            // CURA
             if (skill.type === 'heal') {
                 caster.hp = Math.min(caster.maxHp, caster.hp + skill.healVal);
-                showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.healVal} HP`, 'text-emerald-500');
-                logMessage(`💚 ${casterName} usou [${skill.name}] e recuperou ${skill.healVal} de vida!`, 'text-emerald-500 font-bold');
+                showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.healVal} HP`, 'text-emerald-400');
+                logMessage(`💚 ${casterName} usou [${skill.name}] e recuperou ${skill.healVal} de vida!`, 'text-emerald-400');
             }
 
+            // ESCUDO
             if (skill.type === 'shield') {
                 caster.shield += skill.shieldVal;
-                showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.shieldVal} Escudo`, 'text-cyan-500');
-                logMessage(`🛡️ ${casterName} usou [${skill.name}] e colocou +${skill.shieldVal} de escudo!`, 'text-cyan-500 font-bold');
+                showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.shieldVal} Escudo`, 'text-cyan-300');
+                logMessage(`🛡️ ${casterName} usou [${skill.name}] e colocou +${skill.shieldVal} de escudo!`, 'text-cyan-300');
             }
 
+            // BUFFS
             if (skill.type === 'buff') {
                 if (skill.buffType === 'damage_boost') {
                     caster.nextDmgBuff = true;
-                    logMessage(`✨ ${casterName} usou [${skill.name}]. O próximo ataque causará +60% de dano!`, 'text-amber-500 font-bold');
+                    logMessage(`✨ ${casterName} usou [${skill.name}]. O próximo ataque causará +60% de dano!`, 'text-amber-300');
                 } else if (skill.buffType === 'evasion') {
                     caster.evasionBuff = true;
-                    logMessage(`🌪️ ${casterName} usou [${skill.name}] e vai esquivar do próximo golpe!`, 'text-cyan-500 font-bold');
+                    logMessage(`🌪️ ${casterName} usou [${skill.name}] e vai esquivar do próximo golpe!`, 'text-cyan-300');
                 }
             }
-        }
-
-        // SURRENDER FEATURE LOGIC
-        function openSurrenderModal() {
-            if (state.currentPhase === 'SELECTION' || state.currentPhase === 'GAME_OVER') return;
-            document.getElementById('surrender-modal').classList.remove('hidden');
-        }
-
-        function closeSurrenderModal() {
-            document.getElementById('surrender-modal').classList.add('hidden');
-        }
-
-        function confirmSurrender() {
-            closeSurrenderModal();
-            state.surrendered = true;
-            state.player.hp = 0;
-            logMessage(`🏳️ Você levantou a bandeira branca e desistiu da batalha!`, 'text-rose-400 font-bold');
-            updateUI();
-            checkGameOver();
         }
 
         function updateUI() {
@@ -1239,6 +1294,7 @@
             renderBuffs('player-buffs', state.player);
             renderBuffs('cpu-buffs', state.cpu);
 
+            // Atualizar Estados dos Botões de Habilidades do Player
             updateSkillButtons();
         }
 
@@ -1253,17 +1309,17 @@
 
                 const cd = state.player.cooldowns[idx];
 
-                if (idx === 4) {
+                if (idx === 4) { // Suprema
                     if (state.player.ultWins >= WINS_REQUIRED_FOR_ULT) {
                         btn.disabled = false;
-                        btn.classList.add('ultimate-ready', 'border-amber-500');
+                        btn.classList.add('ultimate-ready', 'border-amber-400', 'bg-amber-950/40');
                         descEl.innerText = "🌟 PRONTA PARA USAR!";
                     } else {
                         btn.disabled = true;
-                        btn.classList.remove('ultimate-ready', 'border-amber-500');
+                        btn.classList.remove('ultimate-ready', 'border-amber-400', 'bg-amber-950/40');
                         descEl.innerText = `Requer ${WINS_REQUIRED_FOR_ULT - state.player.ultWins} vitórias em PPT!`;
                     }
-                } else if (cd > 0) {
+                } else if (cd > 0) { // Em Recarga
                     btn.disabled = true;
                     descEl.innerText = `⏳ Recarregando (${cd} rodada${cd > 1 ? 's' : ''})...`;
                 } else {
@@ -1278,11 +1334,7 @@
             container.innerHTML = '';
             for (let i = 0; i < WINS_REQUIRED_FOR_ULT; i++) {
                 const dot = document.createElement('span');
-                dot.className = `inline-block w-3 h-3 rounded-full border ${
-                    i < wins 
-                        ? 'bg-amber-400 border-amber-500 shadow-[0_0_8px_rgba(251,191,36,0.8)]' 
-                        : 'bg-slate-800 ult-dot-empty border-slate-700'
-                }`;
+                dot.className = `inline-block w-3 h-3 rounded-full border border-amber-500/50 ${i < wins ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 'bg-slate-800'}`;
                 container.appendChild(dot);
             }
         }
@@ -1310,6 +1362,7 @@
             const rpsCtrl = document.getElementById('rps-controls');
             const skillCtrl = document.getElementById('skill-controls');
 
+            // Resetar estados de seleção ao mudar de tela
             selectedSkillIndex = null;
             const confirmSkillBtn = document.getElementById('btn-confirm-skill');
             confirmSkillBtn.disabled = true;
@@ -1363,30 +1416,23 @@
                 const icon = document.getElementById('modal-icon');
                 const rankBadge = document.getElementById('modal-rank-badge');
 
-                document.getElementById('btn-surrender-header').classList.add('hidden');
                 modal.classList.remove('hidden');
 
-                if (state.surrendered) {
-                    icon.innerText = "🏳️";
-                    title.innerText = "Derrota por Desistência";
-                    title.className = "text-3xl font-black font-title mb-2 text-rose-500";
-                    desc.innerText = "Você abandonou o combate e declarou a vitória do oponente.";
-                    rankBadge.classList.add('hidden');
-                } else if (state.player.hp <= 0 && state.cpu.hp <= 0) {
+                if (state.player.hp <= 0 && state.cpu.hp <= 0) {
                     icon.innerText = "⚖️";
                     title.innerText = "Empate Perfeito!";
-                    title.className = "text-3xl font-black font-title mb-2 text-amber-400";
                     desc.innerText = "Ambos os lutadores caíram exaustos na arena ao mesmo tempo.";
                     rankBadge.classList.add('hidden');
                 } else if (state.player.hp > 0) {
                     icon.innerText = "🏆";
                     title.innerText = "Vitória Gloriosa!";
-                    title.className = "text-3xl font-black font-title mb-2 text-emerald-500";
+                    title.className = "text-3xl font-black font-title mb-2 text-emerald-400";
                     desc.innerText = `Você eliminou o oponente após ${state.roundCount} rodadas intensas de combate!`;
 
+                    // Registrar no Ranking
                     const position = recordWinRanking(state.playerName, state.player.classKey, state.player.hp, state.player.maxHp, state.roundCount);
                     
-                    rankBadge.innerHTML = `🌟 <strong>Pontuação no Ranking:</strong> ${state.player.hp}/${state.player.maxHp} HP Sobrando<br><span class="text-amber-500 font-bold">Você alcançou a Posição #${position} no Ranking!</span>`;
+                    rankBadge.innerHTML = `🌟 <strong>Pontuação no Ranking:</strong> ${state.player.hp}/${state.player.maxHp} HP Sobrando<br><span class="text-amber-400 font-bold">Você alcançou a Posição #${position} no Ranking!</span>`;
                     rankBadge.classList.remove('hidden');
                 } else {
                     icon.innerText = "💀";
@@ -1404,8 +1450,7 @@
                 classKey: classKey,
                 hpRemaining: hpRemaining,
                 maxHp: maxHp,
-                rounds: rounds,
-                date: new Date().toLocaleDateString('pt-BR')
+                rounds: rounds
             };
 
             state.rankings.push(entry);
@@ -1416,7 +1461,6 @@
                 return a.rounds - b.rounds;
             });
 
-            localStorage.setItem('arena_elemental_rankings', JSON.stringify(state.rankings));
             renderRanking();
 
             const idx = state.rankings.findIndex(r => r === entry);
@@ -1429,8 +1473,8 @@
 
             tbody.innerHTML = '';
 
-            if (!state.rankings || state.rankings.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="p-6 text-center text-slate-400 italic">Nenhum jogador registrado no ranking ainda.<br><span class="text-amber-500 font-semibold text-xs">Jogue uma partida e vença para entrar na lista de campeões!</span></td></tr>';
+            if (state.rankings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-500 italic">Nenhum registro no ranking ainda. Vença uma batalha para aparecer aqui!</td></tr>';
                 return;
             }
 
@@ -1446,20 +1490,14 @@
                 const cls = CLASSES[item.classKey] || { avatar: '⚔️', name: item.classKey };
 
                 tr.innerHTML = `
-                    <td class="p-2.5 font-bold ${index === 0 ? 'text-amber-500' : 'text-slate-300'}">${posBadge}</td>
+                    <td class="p-2.5 font-bold ${index === 0 ? 'text-amber-400' : 'text-slate-300'}">${posBadge}</td>
                     <td class="p-2.5 font-bold text-slate-100">${item.name}</td>
                     <td class="p-2.5 flex items-center gap-1"><span class="text-base">${cls.avatar}</span> <span class="capitalize text-[11px]">${cls.name}</span></td>
-                    <td class="p-2.5 text-right font-black text-emerald-500">${item.hpRemaining} HP <span class="text-[10px] text-slate-400 font-normal">(${item.rounds} rds)</span></td>
+                    <td class="p-2.5 text-right font-black text-emerald-400">${item.hpRemaining} HP <span class="text-[10px] text-slate-400 font-normal">(${item.rounds} rds)</span></td>
                 `;
 
                 tbody.appendChild(tr);
             });
-        }
-
-        function clearRankingHistory() {
-            state.rankings = [];
-            localStorage.removeItem('arena_elemental_rankings');
-            renderRanking();
         }
 
         function toggleRankingModal() {
@@ -1477,24 +1515,22 @@
             state.cpu = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, nextDmgBuff: false, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
             state.currentPhase = 'SELECTION';
             state.roundCount = 1;
-            state.surrendered = false;
 
             selectedRpsChoice = null;
             selectedSkillIndex = null;
 
             document.getElementById('game-over-modal').classList.add('hidden');
-            document.getElementById('surrender-modal').classList.add('hidden');
             document.getElementById('battle-screen').classList.add('hidden');
-            document.getElementById('btn-surrender-header').classList.add('hidden');
             document.getElementById('class-select-screen').classList.remove('hidden');
 
             document.getElementById('combat-log').innerHTML = '<p class="text-slate-500 italic">O combate começou! Faça sua primeira jogada.</p>';
             document.getElementById('btn-start-game').disabled = true;
 
             document.querySelectorAll('.class-card').forEach(card => {
-                card.classList.remove('border-amber-500', 'ring-2', 'ring-amber-500');
+                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
             });
 
+            // Resetar botões de confirmação
             const confirmRpsBtn = document.getElementById('btn-confirm-rps');
             confirmRpsBtn.disabled = true;
             confirmRpsBtn.innerText = 'Confirmar Escolha ⚔️';
