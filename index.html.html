@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedra, Papel, Tesoura: Arena Elemental</title>
+    <title>Pedra, Papel, Tesoura: Arena Elemental Plus</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fontes do Google -->
@@ -28,7 +28,8 @@
                         normal: { main: '#a8a29e', glow: '#d6d3d1', bg: '#292524' },
                         shadow: { main: '#a855f7', glow: '#c084fc', bg: '#2e1065' },
                         luz: { main: '#fef08a', glow: '#ffffff', bg: '#713f12' },
-                        dragao: { main: '#f97316', glow: '#fb923c', bg: '#431407' }
+                        dragao: { main: '#f97316', glow: '#fb923c', bg: '#431407' },
+                        veneno: { main: '#84cc16', glow: '#a3e635', bg: '#1a2e05' }
                     }
                 }
             }
@@ -170,6 +171,9 @@
 
         <!-- Botões do Cabeçalho -->
         <div class="flex items-center gap-2">
+            <button id="surrender-btn" onclick="surrenderGame()" class="hidden px-4 py-2 bg-rose-600/90 hover:bg-rose-500 text-white rounded-xl text-xs font-bold shadow transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                🏳️ Desistir
+            </button>
             <button onclick="toggleRankingModal()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl text-xs font-bold shadow transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
                 🏆 Ranking
             </button>
@@ -182,141 +186,155 @@
     <main id="app-container" class="flex-grow flex items-center justify-center p-4 md:p-6">
         
         <!-- TELA 1: SELEÇÃO DE CLASSE -->
-        <section id="class-select-screen" class="w-full max-w-5xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur">
+        <section id="class-select-screen" class="w-full max-w-6xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur">
             <div class="text-center mb-8">
                 <h2 class="text-2xl md:text-3xl font-bold font-title text-amber-400">Escolha sua Classe Elemental</h2>
-                <p class="text-slate-400 text-sm mt-2">Agora com 9 elementos: Fogo, Água, Terra, Ar, Raio, Normal, Shadow, Luz e Dragão.</p>
+                <p class="text-slate-400 text-sm mt-2">Agora com 10 elementos e vantagens cruzadas equilibradas!</p>
             </div>
 
-            <!-- Grid de Seleção de Classes -->
+            <!-- Grid de Seleção de Classes (10 Elementos) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
                 <!-- Fogo -->
-                <div onclick="selectPlayerClass('fogo')" id="card-fogo" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-red-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">🔥</div>
-                    <h3 class="text-xl font-bold text-red-400 text-center font-title">Fogo</h3>
-                    <span class="block text-xs text-center text-red-300/80 font-semibold mb-3">Dano Alto & Fúria</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-cyan-300">Ar (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-blue-400">Água (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('fogo')" id="card-fogo" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-red-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🔥</div>
+                    <h3 class="text-lg font-bold text-red-400 text-center font-title">Fogo</h3>
+                    <span class="block text-xs text-center text-red-300/80 font-semibold mb-2">Dano Alto & Fúria</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-cyan-300">Ar, Veneno</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-blue-400">Água, Terra</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Supernova Devastadora (Atravessa escudos).
                     </div>
                 </div>
 
                 <!-- Água -->
-                <div onclick="selectPlayerClass('agua')" id="card-agua" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-blue-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">💧</div>
-                    <h3 class="text-xl font-bold text-blue-400 text-center font-title">Água</h3>
-                    <span class="block text-xs text-center text-blue-300/80 font-semibold mb-3">Cura & Sustentação</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-red-400">Fogo (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-emerald-400">Terra (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('agua')" id="card-agua" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-blue-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">💧</div>
+                    <h3 class="text-lg font-bold text-blue-400 text-center font-title">Água</h3>
+                    <span class="block text-xs text-center text-blue-300/80 font-semibold mb-2">Cura & Sustentação</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-red-400">Fogo, Terra</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-300">Raio, Veneno</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
-                        <strong>Suprema:</strong> Tsunami Curativo (Dano + Recuperação de vida).
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Tsunami Curativo (Dano + Recuperação HP).
                     </div>
                 </div>
 
                 <!-- Terra -->
-                <div onclick="selectPlayerClass('terra')" id="card-terra" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-emerald-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">🌿</div>
-                    <h3 class="text-xl font-bold text-emerald-400 text-center font-title">Terra</h3>
-                    <span class="block text-xs text-center text-emerald-300/80 font-semibold mb-3">Escudo & Defesa</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-blue-400">Água (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-cyan-300">Ar (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('terra')" id="card-terra" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-emerald-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🌿</div>
+                    <h3 class="text-lg font-bold text-emerald-400 text-center font-title">Terra</h3>
+                    <span class="block text-xs text-center text-emerald-300/80 font-semibold mb-2">Escudo & Defesa</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Raio</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-cyan-300">Ar, Fogo</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Cataclismo (Destrói escudos inimigos).
                     </div>
                 </div>
 
                 <!-- Ar -->
-                <div onclick="selectPlayerClass('ar')" id="card-ar" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-cyan-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">🌪️</div>
-                    <h3 class="text-xl font-bold text-cyan-400 text-center font-title">Ar</h3>
-                    <span class="block text-xs text-center text-cyan-300/80 font-semibold mb-3">Velocidade & Esquiva</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-emerald-400">Terra (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-red-400">Fogo (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('ar')" id="card-ar" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-cyan-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🌪️</div>
+                    <h3 class="text-lg font-bold text-cyan-400 text-center font-title">Ar</h3>
+                    <span class="block text-xs text-center text-cyan-300/80 font-semibold mb-2">Velocidade & Esquiva</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-emerald-400">Terra, Veneno</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo, Raio</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
-                        <strong>Suprema:</strong> Furacão Mortal (Dano crítico absoluto).
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Furacão Mortal (Dano crítico).
                     </div>
                 </div>
+
                 <!-- Raio -->
-                <div onclick="selectPlayerClass('raio')" id="card-raio" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-400 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">⚡</div>
-                    <h3 class="text-xl font-bold text-yellow-300 text-center font-title">Raio</h3>
-                    <span class="block text-xs text-center text-yellow-200/80 font-semibold mb-3">Velocidade & Choque</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-blue-400">Água (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-emerald-400">Terra (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('raio')" id="card-raio" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-400 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">⚡</div>
+                    <h3 class="text-lg font-bold text-yellow-300 text-center font-title">Raio</h3>
+                    <span class="block text-xs text-center text-yellow-200/80 font-semibold mb-2">Choque & Choque</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Ar</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-emerald-400">Terra, Dragão</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Apocalipse Elétrico.
                     </div>
                 </div>
 
-                <!-- Normal -->
-                <div onclick="selectPlayerClass('normal')" id="card-normal" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-stone-400 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">⚔️</div>
-                    <h3 class="text-xl font-bold text-stone-300 text-center font-title">Normal</h3>
-                    <span class="block text-xs text-center text-stone-300/80 font-semibold mb-3">Equilíbrio & Força</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-purple-400">Shadow (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-orange-400">Dragão (-25% Dano)</strong></li>
+                <!-- Veneno -->
+                <div onclick="selectPlayerClass('veneno')" id="card-veneno" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-lime-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🧪</div>
+                    <h3 class="text-lg font-bold text-lime-400 text-center font-title">Veneno</h3>
+                    <span class="block text-xs text-center text-lime-300/80 font-semibold mb-2">Toxina & Corrosão</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Luz</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo, Ar</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                        <strong>Suprema:</strong> Cataclismo Tóxico (Bypassa escudos).
+                    </div>
+                </div>
+
+                <!-- Normal -->
+                <div onclick="selectPlayerClass('normal')" id="card-normal" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-stone-400 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">⚔️</div>
+                    <h3 class="text-lg font-bold text-stone-300 text-center font-title">Normal</h3>
+                    <span class="block text-xs text-center text-stone-300/80 font-semibold mb-2">Equilíbrio & Força</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-purple-400">Shadow, Veneno</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-orange-400">Dragão, Luz</strong></li>
+                    </ul>
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Golpe Absoluto.
                     </div>
                 </div>
 
                 <!-- Shadow -->
-                <div onclick="selectPlayerClass('shadow')" id="card-shadow" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-purple-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">🌑</div>
-                    <h3 class="text-xl font-bold text-purple-400 text-center font-title">Shadow</h3>
-                    <span class="block text-xs text-center text-purple-300/80 font-semibold mb-3">Trevas & Drenagem</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-yellow-200">Luz (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-orange-400">Dragão (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('shadow')" id="card-shadow" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-purple-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🌑</div>
+                    <h3 class="text-lg font-bold text-purple-400 text-center font-title">Shadow</h3>
+                    <span class="block text-xs text-center text-purple-300/80 font-semibold mb-2">Trevas & Drenagem</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-yellow-200">Luz, Normal</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-orange-400">Dragão, Veneno</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Eclipse Sombrio.
                     </div>
                 </div>
 
                 <!-- Luz -->
-                <div onclick="selectPlayerClass('luz')" id="card-luz" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-200 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">✨</div>
-                    <h3 class="text-xl font-bold text-yellow-100 text-center font-title">Luz</h3>
-                    <span class="block text-xs text-center text-yellow-100/80 font-semibold mb-3">Cura & Purificação</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-purple-400">Shadow (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-yellow-300">Raio (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('luz')" id="card-luz" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-yellow-200 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">✨</div>
+                    <h3 class="text-lg font-bold text-yellow-100 text-center font-title">Luz</h3>
+                    <span class="block text-xs text-center text-yellow-100/80 font-semibold mb-2">Cura & Purificação</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-purple-400">Shadow, Dragão</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-stone-300">Normal, Veneno</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Explosão Divina.
                     </div>
                 </div>
 
                 <!-- Dragão -->
-                <div onclick="selectPlayerClass('dragao')" id="card-dragao" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-orange-500 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
-                    <div class="text-4xl mb-3 text-center">🐉</div>
-                    <h3 class="text-xl font-bold text-orange-400 text-center font-title">Dragão</h3>
-                    <span class="block text-xs text-center text-orange-300/80 font-semibold mb-3">Poder & Dominação</span>
-                    <ul class="text-xs text-slate-300 space-y-1 mb-4">
-                        <li class="text-emerald-400">✓ Forte contra: <strong class="text-yellow-300">Raio (+40% Dano)</strong></li>
-                        <li class="text-rose-400">✗ Fraco contra: <strong class="text-yellow-100">Luz (-25% Dano)</strong></li>
+                <div onclick="selectPlayerClass('dragao')" id="card-dragao" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-orange-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                    <div class="text-4xl mb-2 text-center">🐉</div>
+                    <h3 class="text-lg font-bold text-orange-400 text-center font-title">Dragão</h3>
+                    <span class="block text-xs text-center text-orange-300/80 font-semibold mb-2">Poder & Dominação</span>
+                    <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-stone-300">Normal, Shadow</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-100">Luz, Raio</strong></li>
                     </ul>
-                    <div class="text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
+                    <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Fúria do Dragão Ancestral.
                     </div>
                 </div>
             </div>
 
-            <!-- Opções do Inimigo e Botão do Jogo -->
             <div class="flex flex-col sm:flex-row items-center justify-between bg-slate-950/50 p-4 rounded-xl border border-slate-800 gap-4">
                 <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
                     <!-- Campo de Nome do Jogador -->
@@ -334,6 +352,7 @@
                             <option value="terra">🌿 Terra</option>
                             <option value="ar">🌪️ Ar</option>
                             <option value="raio">⚡ Raio</option>
+                            <option value="veneno">🧪 Veneno</option>
                             <option value="normal">⚔️ Normal</option>
                             <option value="shadow">🌑 Shadow</option>
                             <option value="luz">✨ Luz</option>
@@ -348,7 +367,7 @@
             </div>
         </section>
 
-        <!-- TELA 2: ARENA DE BATALHA (Inicialmente Oculta) -->
+        <!-- TELA 2: ARENA DE BATALHA -->
         <section id="battle-screen" class="hidden w-full max-w-6xl flex flex-col gap-6">
             
             <!-- Painel de Lutadores -->
@@ -370,7 +389,7 @@
                             </div>
                         </div>
                         
-                        <!-- Status de Cargas Supremas (5 Vitórias para Ult) -->
+                        <!-- Status de Cargas Supremas -->
                         <div class="flex flex-col items-end">
                             <span class="text-[10px] uppercase font-bold text-amber-400 tracking-wider">Energia Suprema</span>
                             <div id="player-ult-tracker" class="flex gap-1 mt-1">
@@ -402,7 +421,7 @@
                     </div>
 
                     <!-- Buffs Ativos -->
-                    <div id="player-buffs" class="flex gap-2 mt-3 min-h-[24px]">
+                    <div id="player-buffs" class="flex flex-wrap gap-2 mt-3 min-h-[24px]">
                         <!-- Badges de buff entram aqui -->
                     </div>
                 </div>
@@ -450,7 +469,7 @@
                     </div>
 
                     <!-- Buffs Ativos CPU -->
-                    <div id="cpu-buffs" class="flex gap-2 mt-3 min-h-[24px] justify-end">
+                    <div id="cpu-buffs" class="flex flex-wrap gap-2 mt-3 min-h-[24px] justify-end">
                         <!-- Badges de buff entram aqui -->
                     </div>
                 </div>
@@ -464,7 +483,7 @@
                     Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!
                 </div>
 
-                <!-- ÁREA DE PEDRA, PAPEL E TESOURA (Com Confirmação) -->
+                <!-- ÁREA DE PEDRA, PAPEL E TESOURA -->
                 <div id="rps-controls" class="w-full max-w-lg">
                     <p class="text-xs uppercase tracking-widest text-slate-400 font-semibold mb-4">Selecione seu Movimento</p>
                     
@@ -489,7 +508,7 @@
                     </button>
                 </div>
 
-                <!-- PAINEL DE SELEÇÃO DE HABILIDADES (Com Confirmação) -->
+                <!-- PAINEL DE SELEÇÃO DE HABILIDADES -->
                 <div id="skill-controls" class="hidden w-full max-w-4xl">
                     <div class="text-emerald-400 font-bold text-sm mb-3">
                         🎉 Você venceu a rodada de PPT! Selecione uma habilidade e confirme para atacar:
@@ -512,7 +531,7 @@
                             <span id="skill-desc-1" class="text-[10px] text-slate-300 mt-1 leading-tight">Dano médio equilibrado.</span>
                         </button>
 
-                        <!-- Skill 2: Ataque Pesado (Demorado / Cooldown) -->
+                        <!-- Skill 2: Ataque Pesado -->
                         <button onclick="selectSkill(2)" id="skill-btn-2" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-red-500 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
                             <span class="font-bold text-xs text-red-400 flex items-center justify-between">
                                 <span id="skill-name-2">Pesado</span> 💥
@@ -520,7 +539,7 @@
                             <span id="skill-desc-2" class="text-[10px] text-slate-300 mt-1 leading-tight">Alto dano (2 turnos recarga).</span>
                         </button>
 
-                        <!-- Skill 3: Suporte / Escudo / Cura -->
+                        <!-- Skill 3: Suporte / Buff / Cura -->
                         <button onclick="selectSkill(3)" id="skill-btn-3" class="skill-btn flex flex-col p-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
                             <span class="font-bold text-xs text-blue-400 flex items-center justify-between">
                                 <span id="skill-name-3">Suporte</span> 🛡️
@@ -528,7 +547,7 @@
                             <span id="skill-desc-3" class="text-[10px] text-slate-300 mt-1 leading-tight">Efeito de utilidade.</span>
                         </button>
 
-                        <!-- Skill 4: SUPREMA (Exige 5 Vitórias) -->
+                        <!-- Skill 4: SUPREMA -->
                         <button onclick="selectSkill(4)" id="skill-btn-4" disabled class="skill-btn flex flex-col p-2.5 bg-slate-800 border border-slate-800 rounded-xl text-left transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
                             <span class="font-bold text-xs text-amber-400 flex items-center justify-between">
                                 <span id="skill-name-4">SUPREMA</span> 🌟
@@ -556,14 +575,13 @@
         </section>
     </main>
 
-    <!-- MODAL FIM DE JOGO (VITÓRIA / DERROTA) -->
+    <!-- MODAL FIM DE JOGO -->
     <div id="game-over-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-8 max-w-md w-full text-center shadow-2xl relative overflow-hidden">
             <div id="modal-icon" class="text-6xl mb-4">🏆</div>
             <h2 id="modal-title" class="text-3xl font-black font-title mb-2">Vitória!</h2>
             <p id="modal-desc" class="text-slate-300 text-sm mb-4">Você superou o oponente elemental com maestria!</p>
 
-            <!-- Detalhes do Ranking do Jogador -->
             <div id="modal-rank-badge" class="hidden mb-6 p-3 bg-amber-950/60 border border-amber-500/50 rounded-xl text-amber-300 text-xs">
                 <!-- Preenchido dinamicamente via JS -->
             </div>
@@ -618,50 +636,21 @@
     </div>
 
     <script>
-        // BASE DE DADOS DAS CLASSES E HABILIDADES
+        // BASE DE DADOS DAS CLASSES E HABILIDADES (10 ELEMENTOS)
         const CLASSES = {
             fogo: {
                 name: "Fogo",
                 avatar: "🔥",
                 color: "text-red-400",
                 badgeBg: "bg-red-950/60 text-red-400 border border-red-800",
-                strongAgainst: "ar",
-                weakAgainst: "agua",
+                strongAgainst: ["ar", "veneno"],
+                weakAgainst: ["agua", "terra"],
                 skills: [
-                    {
-                        name: "Chama Veloz",
-                        type: "damage",
-                        power: 14,
-                        bonusUlt: true,
-                        desc: "Dano rápido (14) + Ganha +1 Carga Suprema extra!"
-                    },
-                    {
-                        name: "Bola de Fogo",
-                        type: "damage",
-                        power: 24,
-                        desc: "Dano elemental de Fogo (24)."
-                    },
-                    {
-                        name: "Explosão de Magma",
-                        type: "damage",
-                        power: 45,
-                        cooldownMax: 2,
-                        desc: "Dano Massivo (45). Recarrega em 2 turnos."
-                    },
-                    {
-                        name: "Chama Aumentada",
-                        type: "buff",
-                        buffType: "damage_boost",
-                        cooldownMax: 1,
-                        desc: "+60% de dano na próxima habilidade usada."
-                    },
-                    {
-                        name: "SUPERNOVA DEVASTADORA",
-                        type: "ultimate",
-                        power: 70,
-                        pierceShield: true,
-                        desc: "Dano apocalíptico (70) que atravessa 100% do escudo!"
-                    }
+                    { name: "Chama Veloz", type: "damage", power: 14, bonusUlt: true, desc: "Dano rápido (14) + Ganha +1 Carga Suprema extra!" },
+                    { name: "Bola de Fogo", type: "damage", power: 24, desc: "Dano elemental de Fogo (24)." },
+                    { name: "Explosão de Magma", type: "damage", power: 45, cooldownMax: 2, desc: "Dano Massivo (45). Recarrega em 2 turnos." },
+                    { name: "Chama Aumentada", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA ao usar várias vezes!)." },
+                    { name: "SUPERNOVA DEVASTADORA", type: "ultimate", power: 70, pierceShield: true, desc: "Dano apocalíptico (70) que atravessa 100% do escudo!" }
                 ]
             },
             agua: {
@@ -669,43 +658,14 @@
                 avatar: "💧",
                 color: "text-blue-400",
                 badgeBg: "bg-blue-950/60 text-blue-400 border border-blue-800",
-                strongAgainst: "fogo",
-                weakAgainst: "terra",
+                strongAgainst: ["fogo", "terra"],
+                weakAgainst: ["raio", "veneno"],
                 skills: [
-                    {
-                        name: "Gota Perfurante",
-                        type: "damage",
-                        power: 12,
-                        pierceShield: true,
-                        desc: "Dano rápido (12) que ignora todo o escudo inimigo."
-                    },
-                    {
-                        name: "Jato d'Água",
-                        type: "damage",
-                        power: 22,
-                        desc: "Dano elemental de Água (22)."
-                    },
-                    {
-                        name: "Meteoro de Gelo",
-                        type: "damage",
-                        power: 42,
-                        cooldownMax: 2,
-                        desc: "Dano pesado de gelo (42). Recarrega em 2 turnos."
-                    },
-                    {
-                        name: "Cura Fluida",
-                        type: "heal",
-                        healVal: 38,
-                        cooldownMax: 1,
-                        desc: "Recupera 38 de vida (HP)."
-                    },
-                    {
-                        name: "TSUNAMI CURATIVO",
-                        type: "ultimate",
-                        power: 58,
-                        healVal: 35,
-                        desc: "Causa 58 de dano e recupera 35 de vida simultaneamente!"
-                    }
+                    { name: "Gota Perfurante", type: "damage", power: 12, pierceShield: true, desc: "Dano rápido (12) que ignora todo o escudo inimigo." },
+                    { name: "Jato d'Água", type: "damage", power: 22, desc: "Dano elemental de Água (22)." },
+                    { name: "Meteoro de Gelo", type: "damage", power: 42, cooldownMax: 2, desc: "Dano pesado de gelo (42). Recarrega em 2 turnos." },
+                    { name: "Cura Fluida", type: "heal", healVal: 38, cooldownMax: 1, desc: "Recupera 38 de vida (HP)." },
+                    { name: "TSUNAMI CURATIVO", type: "ultimate", power: 58, healVal: 35, desc: "Causa 58 de dano e recupera 35 de vida!" }
                 ]
             },
             terra: {
@@ -713,43 +673,14 @@
                 avatar: "🌿",
                 color: "text-emerald-400",
                 badgeBg: "bg-emerald-950/60 text-emerald-400 border border-emerald-800",
-                strongAgainst: "agua",
-                weakAgainst: "ar",
+                strongAgainst: ["agua", "raio"],
+                weakAgainst: ["ar", "fogo"],
                 skills: [
-                    {
-                        name: "Lançar Cascalho",
-                        type: "damage",
-                        power: 12,
-                        addShield: 12,
-                        desc: "Dano rápido (12) + Ganha +12 de Escudo imediato."
-                    },
-                    {
-                        name: "Pedrada Elemental",
-                        type: "damage",
-                        power: 23,
-                        desc: "Dano elemental de Terra (23)."
-                    },
-                    {
-                        name: "Meteoro Terrestre",
-                        type: "damage",
-                        power: 44,
-                        cooldownMax: 2,
-                        desc: "Ataque demorado e potente (44). Recarrega em 2 turnos."
-                    },
-                    {
-                        name: "Escudo de Rocha",
-                        type: "shield",
-                        shieldVal: 40,
-                        cooldownMax: 1,
-                        desc: "Ganha +40 de escudo defensivo."
-                    },
-                    {
-                        name: "CATACLISMO TERRESTRE",
-                        type: "ultimate",
-                        power: 65,
-                        breakShield: true,
-                        desc: "Destrói todo o escudo inimigo e causa 65 de dano!"
-                    }
+                    { name: "Lançar Cascalho", type: "damage", power: 12, addShield: 12, desc: "Dano rápido (12) + Ganha +12 de Escudo imediato." },
+                    { name: "Pedrada Elemental", type: "damage", power: 23, desc: "Dano elemental de Terra (23)." },
+                    { name: "Meteoro Terrestre", type: "damage", power: 44, cooldownMax: 2, desc: "Ataque potente (44). Recarrega em 2 turnos." },
+                    { name: "Escudo de Rocha", type: "shield", shieldVal: 40, cooldownMax: 1, desc: "Ganha +40 de escudo defensivo." },
+                    { name: "CATACLISMO TERRESTRE", type: "ultimate", power: 65, breakShield: true, desc: "Destrói todo o escudo inimigo e causa 65 de dano!" }
                 ]
             },
             ar: {
@@ -757,42 +688,14 @@
                 avatar: "🌪️",
                 color: "text-cyan-400",
                 badgeBg: "bg-cyan-950/60 text-cyan-400 border border-cyan-800",
-                strongAgainst: "terra",
-                weakAgainst: "fogo",
+                strongAgainst: ["terra", "veneno"],
+                weakAgainst: ["fogo", "raio"],
                 skills: [
-                    {
-                        name: "Corte Preciso",
-                        type: "damage",
-                        power: 13,
-                        ignoreEvasion: true,
-                        desc: "Dano veloz (13) que atinge o alvo mesmo se ele esquivar."
-                    },
-                    {
-                        name: "Lâmina de Vento",
-                        type: "damage",
-                        power: 23,
-                        desc: "Dano elemental de Ar (23)."
-                    },
-                    {
-                        name: "Tornado Devastador",
-                        type: "damage",
-                        power: 46,
-                        cooldownMax: 2,
-                        desc: "Furacão concentrado (46 dano). Recarrega em 2 turnos."
-                    },
-                    {
-                        name: "Esquiva Eólica",
-                        type: "buff",
-                        buffType: "evasion",
-                        cooldownMax: 1,
-                        desc: "Esquiva 100% do próximo ataque do inimigo."
-                    },
-                    {
-                        name: "TEMPESTADE MORTAL",
-                        type: "ultimate",
-                        power: 72,
-                        desc: "Ataque crítico avassalador de 72 de dano!"
-                    }
+                    { name: "Corte Preciso", type: "damage", power: 13, ignoreEvasion: true, desc: "Dano veloz (13) que atinge o alvo mesmo se ele esquivar." },
+                    { name: "Lâmina de Vento", type: "damage", power: 23, desc: "Dano elemental de Ar (23)." },
+                    { name: "Tornado Devastador", type: "damage", power: 46, cooldownMax: 2, desc: "Furacão concentrado (46 dano). Recarrega em 2 turnos." },
+                    { name: "Esquiva Eólica", type: "buff", buffType: "evasion", cooldownMax: 1, desc: "Esquiva 100% do próximo ataque inimigo." },
+                    { name: "TEMPESTADE MORTAL", type: "ultimate", power: 72, desc: "Ataque crítico avassalador de 72 de dano!" }
                 ]
             },
             raio: {
@@ -800,8 +703,8 @@
                 avatar: "⚡",
                 color: "text-yellow-300",
                 badgeBg: "bg-yellow-950/60 text-yellow-300 border border-yellow-800",
-                strongAgainst: "agua",
-                weakAgainst: "terra",
+                strongAgainst: ["agua", "ar"],
+                weakAgainst: ["terra", "dragao"],
                 skills: [
                     { name: "Faísca Rápida", type: "damage", power: 15, bonusUlt: true, desc: "Raio veloz (15) +1 Carga Suprema extra." },
                     { name: "Descarga Elétrica", type: "damage", power: 25, desc: "Ataque elétrico de 25 de dano." },
@@ -810,18 +713,33 @@
                     { name: "APOCALIPSE ELÉTRICO", type: "ultimate", power: 76, pierceShield: true, desc: "Relâmpago devastador de 76 que atravessa escudos." }
                 ]
             },
+            veneno: {
+                name: "Veneno",
+                avatar: "🧪",
+                color: "text-lime-400",
+                badgeBg: "bg-lime-950/60 text-lime-400 border border-lime-800",
+                strongAgainst: ["agua", "luz"],
+                weakAgainst: ["fogo", "ar"],
+                skills: [
+                    { name: "Picada Tóxica", type: "damage", power: 13, bonusUlt: true, desc: "Dano tóxico rápido (13) +1 Carga Suprema extra." },
+                    { name: "Bomba de Veneno", type: "damage", power: 24, desc: "Ataque corrosivo de 24 de dano." },
+                    { name: "Líquido Corrosivo", type: "damage", power: 46, cooldownMax: 2, desc: "Dano corrosivo alto (46). Recarrega em 2 turnos." },
+                    { name: "Injeção de Toxina", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA ao usar mais vezes!)." },
+                    { name: "CATACLISMO TÓXICO", type: "ultimate", power: 75, pierceShield: true, desc: "Toxina apocalíptica de 75 de dano ignorando escudos!" }
+                ]
+            },
             normal: {
                 name: "Normal",
                 avatar: "⚔️",
                 color: "text-stone-300",
                 badgeBg: "bg-stone-800/70 text-stone-300 border border-stone-600",
-                strongAgainst: "shadow",
-                weakAgainst: "dragao",
+                strongAgainst: ["shadow", "veneno"],
+                weakAgainst: ["dragao", "luz"],
                 skills: [
                     { name: "Investida", type: "damage", power: 14, bonusUlt: true, desc: "Ataque físico rápido (14) +1 Carga Suprema." },
                     { name: "Golpe Preciso", type: "damage", power: 24, desc: "Ataque equilibrado de 24 de dano." },
                     { name: "Impacto Brutal", type: "damage", power: 46, cooldownMax: 2, desc: "Golpe pesado de 46 de dano." },
-                    { name: "Postura de Combate", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano no próximo ataque." },
+                    { name: "Postura de Combate", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano no próximo ataque (ACUMULA!)." },
                     { name: "GOLPE ABSOLUTO", type: "ultimate", power: 70, breakShield: true, desc: "Ataque físico de 70 que destrói o escudo inimigo." }
                 ]
             },
@@ -830,8 +748,8 @@
                 avatar: "🌑",
                 color: "text-purple-400",
                 badgeBg: "bg-purple-950/60 text-purple-400 border border-purple-800",
-                strongAgainst: "luz",
-                weakAgainst: "dragao",
+                strongAgainst: ["luz", "normal"],
+                weakAgainst: ["dragao", "veneno"],
                 skills: [
                     { name: "Sombra Rápida", type: "damage", power: 14, ignoreEvasion: true, desc: "Ataque sombrio (14) que ignora esquiva." },
                     { name: "Lâmina Sombria", type: "damage", power: 25, desc: "Corte das trevas de 25 de dano." },
@@ -845,8 +763,8 @@
                 avatar: "✨",
                 color: "text-yellow-100",
                 badgeBg: "bg-yellow-950/50 text-yellow-100 border border-yellow-700",
-                strongAgainst: "shadow",
-                weakAgainst: "raio",
+                strongAgainst: ["shadow", "dragao"],
+                weakAgainst: ["normal", "veneno"],
                 skills: [
                     { name: "Raio Luminoso", type: "damage", power: 13, bonusUlt: true, desc: "Ataque de luz (13) +1 Carga Suprema." },
                     { name: "Lança Solar", type: "damage", power: 24, desc: "Energia solar de 24 de dano." },
@@ -860,8 +778,8 @@
                 avatar: "🐉",
                 color: "text-orange-400",
                 badgeBg: "bg-orange-950/60 text-orange-400 border border-orange-800",
-                strongAgainst: "raio",
-                weakAgainst: "luz",
+                strongAgainst: ["normal", "shadow"],
+                weakAgainst: ["luz", "raio"],
                 skills: [
                     { name: "Garra Dracônica", type: "damage", power: 16, bonusUlt: true, desc: "Garra veloz (16) +1 Carga Suprema." },
                     { name: "Sopro Dracônico", type: "damage", power: 27, desc: "Chama ancestral de 27 de dano." },
@@ -881,7 +799,7 @@
                 maxHp: 250,
                 shield: 0,
                 ultWins: 0,
-                nextDmgBuff: false,
+                dmgBuffStacks: 0, // Acúmulo de dano bônus (+60% por pilha)
                 evasionBuff: false,
                 cooldowns: [0, 0, 0, 0, 0]
             },
@@ -891,18 +809,13 @@
                 maxHp: 250,
                 shield: 0,
                 ultWins: 0,
-                nextDmgBuff: false,
+                dmgBuffStacks: 0, // Acúmulo de dano bônus para CPU
                 evasionBuff: false,
                 cooldowns: [0, 0, 0, 0, 0]
             },
             currentPhase: 'SELECTION',
             roundCount: 1,
-            rankings: [
-                { name: "Mestre Ignis", classKey: "fogo", hpRemaining: 230, maxHp: 250, rounds: 6 },
-                { name: "Sábia Aqualis", classKey: "agua", hpRemaining: 190, maxHp: 250, rounds: 8 },
-                { name: "Guardião Terran", classKey: "terra", hpRemaining: 150, maxHp: 250, rounds: 10 },
-                { name: "Vento Celestial", classKey: "ar", hpRemaining: 90, maxHp: 250, rounds: 12 }
-            ]
+            rankings: []
         };
 
         const WINS_REQUIRED_FOR_ULT = 5;
@@ -941,10 +854,19 @@
 
             document.getElementById('class-select-screen').classList.add('hidden');
             document.getElementById('battle-screen').classList.remove('hidden');
+            const surrenderBtn = document.getElementById('surrender-btn');
+            if (surrenderBtn) surrenderBtn.classList.remove('hidden');
 
             setupBattlefield();
             state.currentPhase = 'RPS';
             logMessage(`⚔️ A Batalha começou! Combate até a morte (250 HP).`, 'text-amber-400');
+        }
+
+        function surrenderGame() {
+            if (state.currentPhase === 'GAME_OVER' || state.currentPhase === 'SELECTION') return;
+            logMessage(`🏳️ ${state.playerName} desistiu da batalha!`, 'text-rose-400');
+            state.player.hp = 0;
+            checkGameOver();
         }
 
         function setupBattlefield() {
@@ -983,7 +905,6 @@
             }
         }
 
-        // SELEÇÃO E CONFIRMAÇÃO DE PEDRA, PAPEL OU TESOURA
         function selectRPS(choice) {
             if (state.currentPhase !== 'RPS') return;
             selectedRpsChoice = choice;
@@ -1012,7 +933,6 @@
 
             const choice = selectedRpsChoice;
 
-            // Resetar visual de seleção do RPS
             selectedRpsChoice = null;
             ['pedra', 'papel', 'tesoura'].forEach(c => {
                 const btn = document.getElementById(`rps-btn-${c}`);
@@ -1024,7 +944,6 @@
             confirmBtn.disabled = true;
             confirmBtn.innerText = 'Confirmar Escolha ⚔️';
 
-            // Executar a jogada
             playRPS(choice);
         }
 
@@ -1068,14 +987,12 @@
             updateUI();
         }
 
-        // SELEÇÃO E CONFIRMAÇÃO DE PODER / HABILIDADE
         function selectSkill(index) {
             if (state.currentPhase !== 'SKILL_SELECT') return;
 
             const pClass = CLASSES[state.player.classKey];
             const skill = pClass.skills[index];
 
-            // Não selecionar se estiver em cooldown ou se a suprema não estiver carregada
             if (state.player.cooldowns[index] > 0) return;
             if (skill.type === 'ultimate' && state.player.ultWins < WINS_REQUIRED_FOR_ULT) return;
 
@@ -1100,7 +1017,6 @@
 
             const index = selectedSkillIndex;
 
-            // Limpar estado de seleção
             selectedSkillIndex = null;
             const pClass = CLASSES[state.player.classKey];
             pClass.skills.forEach((_, idx) => {
@@ -1115,11 +1031,12 @@
             useSkill(index);
         }
 
+        // CÁLCULO DE VANTAGENS E DESVANTAGENS ELEMENTAIS
         function calculateElementalMultiplier(attackerClassKey, defenderClassKey) {
             const attackerClass = CLASSES[attackerClassKey];
-            if (attackerClass.strongAgainst === defenderClassKey) {
+            if (attackerClass.strongAgainst && attackerClass.strongAgainst.includes(defenderClassKey)) {
                 return { mult: 1.4, text: " (Vantagem Elemental! +40%)", type: "strong" };
-            } else if (attackerClass.weakAgainst === defenderClassKey) {
+            } else if (attackerClass.weakAgainst && attackerClass.weakAgainst.includes(defenderClassKey)) {
                 return { mult: 0.75, text: " (Desvantagem Elemental -25%)", type: "weak" };
             }
             return { mult: 1.0, text: "", type: "neutral" };
@@ -1148,18 +1065,17 @@
 
         function executeCpuTurn() {
             const cpuClass = CLASSES[state.cpu.classKey];
-            let chosenSkillIndex = 1; // Padrão: Ataque Normal
+            let chosenSkillIndex = 1;
 
-            // IA Inteligente da CPU
             if (state.cpu.ultWins >= WINS_REQUIRED_FOR_ULT) {
-                chosenSkillIndex = 4; // Suprema
+                chosenSkillIndex = 4;
                 state.cpu.ultWins -= WINS_REQUIRED_FOR_ULT;
             } else if (state.cpu.cooldowns[2] === 0 && Math.random() < 0.45) {
-                chosenSkillIndex = 2; // Ataque Pesado
-            } else if (state.cpu.hp < 90 && state.cpu.cooldowns[3] === 0 && Math.random() < 0.6) {
-                chosenSkillIndex = 3; // Suporte (Cura / Escudo)
+                chosenSkillIndex = 2;
+            } else if (state.cpu.hp < 110 && state.cpu.cooldowns[3] === 0 && Math.random() < 0.6) {
+                chosenSkillIndex = 3;
             } else if (Math.random() < 0.4) {
-                chosenSkillIndex = 0; // Ataque Rápido
+                chosenSkillIndex = 0;
             }
 
             const skill = cpuClass.skills[chosenSkillIndex];
@@ -1192,21 +1108,24 @@
                 return;
             }
 
-            // DANO
+            // DANO (Com bônus acumulativo e multiplicador elemental)
             if (skill.type === 'damage' || skill.type === 'ultimate') {
                 let basePower = skill.power || 0;
                 const elem = calculateElementalMultiplier(caster.classKey, target.classKey);
                 let finalDamage = Math.round(basePower * elem.mult);
 
-                if (caster.nextDmgBuff) {
-                    finalDamage = Math.round(finalDamage * 1.6);
-                    caster.nextDmgBuff = false;
-                    logMessage(`🔥 Bônus de Dano ativado (+60% de Dano extra)!`, 'text-orange-400');
+                // APLICAÇÃO DE DANO BÔNUS ACUMULADO (STACKING DAMAGE BOOST)
+                if (caster.dmgBuffStacks > 0) {
+                    const stackMultiplier = 1 + (caster.dmgBuffStacks * 0.60);
+                    const boostedDamage = Math.round(finalDamage * stackMultiplier);
+                    logMessage(`🔥 DANO ACUMULADO DISPARADO! (+${caster.dmgBuffStacks * 60}% de Dano Bônus por ${caster.dmgBuffStacks} pilha(s))!`, 'text-orange-400');
+                    finalDamage = boostedDamage;
+                    caster.dmgBuffStacks = 0; // Consome todos os acúmulos após disparar o golpe!
                 }
 
                 if (skill.breakShield && target.shield > 0) {
                     target.shield = 0;
-                    logMessage(`💥 O Cataclismo pulverizou todo o escudo de ${targetName}!`, 'text-amber-400');
+                    logMessage(`💥 O ataque pulverizou todo o escudo de ${targetName}!`, 'text-amber-400');
                 }
 
                 let actualDmgToHp = finalDamage;
@@ -1225,7 +1144,7 @@
                 triggerShake(targetCardId);
                 showDamagePopup(targetCardId, `-${finalDamage}`, 'text-red-500');
 
-                logMessage(`⚔️ ${casterName} usou [${skill.name}] causando ${finalDamage} de dano em ${targetName}${elem.text}!`, elem.type === 'strong' ? 'text-emerald-300' : 'text-slate-200');
+                logMessage(`⚔️ ${casterName} usou [${skill.name}] causando ${finalDamage} de dano em ${targetName}${elem.text}!`, elem.type === 'strong' ? 'text-emerald-300' : (elem.type === 'weak' ? 'text-rose-300' : 'text-slate-200'));
 
                 if (skill.bonusUlt) {
                     caster.ultWins = Math.min(WINS_REQUIRED_FOR_ULT, caster.ultWins + 1);
@@ -1257,11 +1176,12 @@
                 logMessage(`🛡️ ${casterName} usou [${skill.name}] e colocou +${skill.shieldVal} de escudo!`, 'text-cyan-300');
             }
 
-            // BUFFS
+            // BUFFS (Com suporte a ACÚMULO de Dano)
             if (skill.type === 'buff') {
                 if (skill.buffType === 'damage_boost') {
-                    caster.nextDmgBuff = true;
-                    logMessage(`✨ ${casterName} usou [${skill.name}]. O próximo ataque causará +60% de dano!`, 'text-amber-300');
+                    caster.dmgBuffStacks = (caster.dmgBuffStacks || 0) + 1;
+                    const totalPct = caster.dmgBuffStacks * 60;
+                    logMessage(`✨ ${casterName} usou [${skill.name}]. Dano Acumulado: +${totalPct}% (Pilha x${caster.dmgBuffStacks}) para o próximo ataque!`, 'text-amber-300');
                 } else if (skill.buffType === 'evasion') {
                     caster.evasionBuff = true;
                     logMessage(`🌪️ ${casterName} usou [${skill.name}] e vai esquivar do próximo golpe!`, 'text-cyan-300');
@@ -1294,7 +1214,6 @@
             renderBuffs('player-buffs', state.player);
             renderBuffs('cpu-buffs', state.cpu);
 
-            // Atualizar Estados dos Botões de Habilidades do Player
             updateSkillButtons();
         }
 
@@ -1343,16 +1262,16 @@
             const container = document.getElementById(containerId);
             container.innerHTML = '';
 
-            if (entity.nextDmgBuff) {
+            if (entity.dmgBuffStacks > 0) {
                 const b = document.createElement('span');
-                b.className = 'text-[10px] bg-amber-950/80 text-amber-300 border border-amber-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1';
-                b.innerText = '🔥 +60% Dano';
+                b.className = 'text-[10px] bg-amber-950/80 text-amber-300 border border-amber-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1 shadow-sm';
+                b.innerText = `🔥 +${entity.dmgBuffStacks * 60}% Dano (x${entity.dmgBuffStacks})`;
                 container.appendChild(b);
             }
 
             if (entity.evasionBuff) {
                 const b = document.createElement('span');
-                b.className = 'text-[10px] bg-cyan-950/80 text-cyan-300 border border-cyan-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1';
+                b.className = 'text-[10px] bg-cyan-950/80 text-cyan-300 border border-cyan-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1 shadow-sm';
                 b.innerText = '🌪️ Esquiva Pronta';
                 container.appendChild(b);
             }
@@ -1362,7 +1281,6 @@
             const rpsCtrl = document.getElementById('rps-controls');
             const skillCtrl = document.getElementById('skill-controls');
 
-            // Resetar estados de seleção ao mudar de tela
             selectedSkillIndex = null;
             const confirmSkillBtn = document.getElementById('btn-confirm-skill');
             confirmSkillBtn.disabled = true;
@@ -1410,6 +1328,10 @@
         function checkGameOver() {
             if (state.player.hp <= 0 || state.cpu.hp <= 0) {
                 state.currentPhase = 'GAME_OVER';
+                
+                const surrenderBtn = document.getElementById('surrender-btn');
+                if (surrenderBtn) surrenderBtn.classList.add('hidden');
+
                 const modal = document.getElementById('game-over-modal');
                 const title = document.getElementById('modal-title');
                 const desc = document.getElementById('modal-desc');
@@ -1429,7 +1351,6 @@
                     title.className = "text-3xl font-black font-title mb-2 text-emerald-400";
                     desc.innerText = `Você eliminou o oponente após ${state.roundCount} rodadas intensas de combate!`;
 
-                    // Registrar no Ranking
                     const position = recordWinRanking(state.playerName, state.player.classKey, state.player.hp, state.player.maxHp, state.roundCount);
                     
                     rankBadge.innerHTML = `🌟 <strong>Pontuação no Ranking:</strong> ${state.player.hp}/${state.player.maxHp} HP Sobrando<br><span class="text-amber-400 font-bold">Você alcançou a Posição #${position} no Ranking!</span>`;
@@ -1460,6 +1381,11 @@
                 }
                 return a.rounds - b.rounds;
             });
+
+            // Salva o ranking dos jogadores no navegador
+            try {
+                localStorage.setItem('arena_rankings', JSON.stringify(state.rankings));
+            } catch(e) {}
 
             renderRanking();
 
@@ -1511,13 +1437,16 @@
         }
 
         function resetGame() {
-            state.player = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, nextDmgBuff: false, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
-            state.cpu = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, nextDmgBuff: false, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
+            state.player = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
+            state.cpu = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
             state.currentPhase = 'SELECTION';
             state.roundCount = 1;
 
             selectedRpsChoice = null;
             selectedSkillIndex = null;
+
+            const surrenderBtn = document.getElementById('surrender-btn');
+            if (surrenderBtn) surrenderBtn.classList.add('hidden');
 
             document.getElementById('game-over-modal').classList.add('hidden');
             document.getElementById('battle-screen').classList.add('hidden');
@@ -1530,7 +1459,6 @@
                 card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
             });
 
-            // Resetar botões de confirmação
             const confirmRpsBtn = document.getElementById('btn-confirm-rps');
             confirmRpsBtn.disabled = true;
             confirmRpsBtn.innerText = 'Confirmar Escolha ⚔️';
@@ -1560,6 +1488,15 @@
                 const btn = document.getElementById('theme-toggle-btn');
                 if (btn) btn.innerHTML = '🌙 Modo Escuro';
             }
+
+            // Carrega vitórias salvas dos jogadores
+            try {
+                const savedRankings = localStorage.getItem('arena_rankings');
+                if (savedRankings) {
+                    state.rankings = JSON.parse(savedRankings);
+                }
+            } catch(e) {}
+
             renderRanking();
         });
     </script>
