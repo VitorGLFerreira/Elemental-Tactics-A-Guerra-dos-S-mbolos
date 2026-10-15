@@ -155,6 +155,25 @@
         body.light-mode .text-slate-200 { color: #1e293b !important; }
         body.light-mode .text-slate-500 { color: #64748b !important; }
 
+        body.light-mode #player-name-input,
+        body.light-mode #cpu-class-select {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #94a3b8 !important;
+        }
+
+        body.light-mode #theme-toggle-btn {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light-mode #surrender-modal > div {
+            background-color: #ffffff !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+
         body.light-mode ::-webkit-scrollbar-track { background: #e2e8f0; }
         body.light-mode ::-webkit-scrollbar-thumb { background: #94a3b8; }
     </style>
@@ -200,11 +219,11 @@
                     <h3 class="text-lg font-bold text-red-400 text-center font-title">Fogo</h3>
                     <span class="block text-xs text-center text-red-300/80 font-semibold mb-2">Dano Alto & Fúria</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-cyan-300">Ar, Veneno</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-blue-400">Água, Terra</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-cyan-300">Ar (+40%), Veneno (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-blue-400">Água (-40%), Terra (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
-                        <strong>Suprema:</strong> Supernova Devastadora (Atravessa escudos).
+                        <strong>Suprema:</strong> Supernova (Atravessa escudos + Queima 2 rodadas).
                     </div>
                 </div>
 
@@ -214,8 +233,8 @@
                     <h3 class="text-lg font-bold text-blue-400 text-center font-title">Água</h3>
                     <span class="block text-xs text-center text-blue-300/80 font-semibold mb-2">Cura & Sustentação</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-red-400">Fogo, Terra</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-300">Raio, Veneno</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-red-400">Fogo (+40%), Terra (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-300">Raio (-40%), Veneno (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Tsunami Curativo (Dano + Recuperação HP).
@@ -228,8 +247,8 @@
                     <h3 class="text-lg font-bold text-emerald-400 text-center font-title">Terra</h3>
                     <span class="block text-xs text-center text-emerald-300/80 font-semibold mb-2">Escudo & Defesa</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Raio</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-cyan-300">Ar, Fogo</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-yellow-300">Raio (+40%), Fogo (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-cyan-300">Ar (-40%), Normal (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Cataclismo (Destrói escudos inimigos).
@@ -242,8 +261,8 @@
                     <h3 class="text-lg font-bold text-cyan-400 text-center font-title">Ar</h3>
                     <span class="block text-xs text-center text-cyan-300/80 font-semibold mb-2">Velocidade & Esquiva</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-emerald-400">Terra, Veneno</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo, Raio</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-emerald-400">Terra (+40%), Veneno (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo (-40%), Raio (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Furacão Mortal (Dano crítico).
@@ -256,8 +275,8 @@
                     <h3 class="text-lg font-bold text-yellow-300 text-center font-title">Raio</h3>
                     <span class="block text-xs text-center text-yellow-200/80 font-semibold mb-2">Choque & Choque</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Ar</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-emerald-400">Terra, Dragão</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água (+40%), Todos (+5%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-emerald-400">Terra (-40%), Dragão (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Apocalipse Elétrico.
@@ -270,11 +289,11 @@
                     <h3 class="text-lg font-bold text-lime-400 text-center font-title">Veneno</h3>
                     <span class="block text-xs text-center text-lime-300/80 font-semibold mb-2">Toxina & Corrosão</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-blue-400">Água, Luz</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo, Ar</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-stone-300">Normal (+40%), Água (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-red-400">Fogo (-20%), Ar (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
-                        <strong>Suprema:</strong> Cataclismo Tóxico (Bypassa escudos).
+                        <strong>Suprema:</strong> Cataclismo Tóxico (Atravessa escudos + Envenena 4 rodadas).
                     </div>
                 </div>
 
@@ -284,8 +303,8 @@
                     <h3 class="text-lg font-bold text-stone-300 text-center font-title">Normal</h3>
                     <span class="block text-xs text-center text-stone-300/80 font-semibold mb-2">Equilíbrio & Força</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-purple-400">Shadow, Veneno</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-orange-400">Dragão, Luz</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-orange-400">Dragão (+50%), Terra (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-lime-400">Veneno (-40%), Dragão (-20%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Golpe Absoluto.
@@ -298,8 +317,8 @@
                     <h3 class="text-lg font-bold text-purple-400 text-center font-title">Shadow</h3>
                     <span class="block text-xs text-center text-purple-300/80 font-semibold mb-2">Trevas & Drenagem</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-yellow-200">Luz, Normal</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-orange-400">Dragão, Veneno</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-yellow-100">Luz (+40%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-100">Luz (-40%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Eclipse Sombrio.
@@ -312,8 +331,8 @@
                     <h3 class="text-lg font-bold text-yellow-100 text-center font-title">Luz</h3>
                     <span class="block text-xs text-center text-yellow-100/80 font-semibold mb-2">Cura & Purificação</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-purple-400">Shadow, Dragão</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-stone-300">Normal, Veneno</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-purple-400">Shadow (+40%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-purple-400">Shadow (-40%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
                         <strong>Suprema:</strong> Explosão Divina.
@@ -326,11 +345,11 @@
                     <h3 class="text-lg font-bold text-orange-400 text-center font-title">Dragão</h3>
                     <span class="block text-xs text-center text-orange-300/80 font-semibold mb-2">Poder & Dominação</span>
                     <ul class="text-[11px] text-slate-300 space-y-1 mb-3">
-                        <li class="text-emerald-400">✓ Forte: <strong class="text-stone-300">Normal, Shadow</strong></li>
-                        <li class="text-rose-400">✗ Fraco: <strong class="text-yellow-100">Luz, Raio</strong></li>
+                        <li class="text-emerald-400">✓ Forte: <strong class="text-yellow-300">Raio (+20%), Normal (+20%)</strong></li>
+                        <li class="text-rose-400">✗ Fraco: <strong class="text-stone-300">Normal (-50%)</strong></li>
                     </ul>
                     <div class="text-[10px] text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-800">
-                        <strong>Suprema:</strong> Fúria do Dragão Ancestral.
+                        <strong>Suprema:</strong> Fúria Ancestral (Destrói escudos + Queima 2 rodadas).
                     </div>
                 </div>
             </div>
@@ -597,6 +616,23 @@
         </div>
     </div>
 
+    <!-- MODAL DE CONFIRMAÇÃO DE DESISTÊNCIA -->
+    <div id="surrender-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+            <div class="text-4xl mb-3">🏳️</div>
+            <h3 class="text-xl font-bold font-title text-rose-400 mb-2">Confirmar Desistência?</h3>
+            <p class="text-slate-300 text-xs mb-6">Tem certeza que deseja desistir da batalha? Sua vitória no ranking não será salva.</p>
+            <div class="flex gap-3">
+                <button onclick="cancelSurrender()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold cursor-pointer transition-colors">
+                    Cancelar
+                </button>
+                <button onclick="confirmSurrender()" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors">
+                    Sim, Desistir
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL DO RANKING -->
     <div id="ranking-modal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border-2 border-slate-800 rounded-2xl p-6 max-w-lg w-full shadow-2xl relative max-h-[90vh] flex flex-col">
@@ -627,7 +663,10 @@
                 </table>
             </div>
 
-            <div class="mt-5 pt-3 border-t border-slate-800 text-center">
+            <div class="mt-5 pt-3 border-t border-slate-800 flex items-center justify-between gap-3">
+                <button onclick="clearRanking()" class="px-4 py-2 bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/80 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5">
+                    🗑️ Resetar Ranking
+                </button>
                 <button onclick="toggleRankingModal()" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-all cursor-pointer">
                     Fechar
                 </button>
@@ -636,21 +675,63 @@
     </div>
 
     <script>
-        // BASE DE DADOS DAS CLASSES E HABILIDADES (10 ELEMENTOS)
+        // BASE DE DADOS DE RELAÇÕES ELEMENTAIS CUSTOMIZADAS
+        const ELEMENTAL_RELATIONS = {
+            fogo: {
+                strong: { ar: 0.40, veneno: 0.20 },
+                weak: { agua: 0.40, terra: 0.20 }
+            },
+            agua: {
+                strong: { fogo: 0.40, terra: 0.20 },
+                weak: { raio: 0.40, veneno: 0.20 }
+            },
+            terra: {
+                strong: { raio: 0.40, fogo: 0.20 },
+                weak: { ar: 0.40, normal: 0.20 }
+            },
+            ar: {
+                strong: { terra: 0.40, veneno: 0.20 },
+                weak: { fogo: 0.40, raio: 0.20 }
+            },
+            raio: {
+                strong: { agua: 0.40 },
+                weak: { terra: 0.40, dragao: 0.20 },
+                allBonus: 0.05 // +5% contra todas as outras
+            },
+            veneno: {
+                strong: { normal: 0.40, agua: 0.20 },
+                weak: { fogo: 0.20, ar: 0.20 }
+            },
+            normal: {
+                strong: { dragao: 0.50, terra: 0.20 },
+                weak: { veneno: 0.40, dragao: 0.20 }
+            },
+            shadow: {
+                strong: { luz: 0.40 },
+                weak: { luz: 0.40 }
+            },
+            luz: {
+                strong: { shadow: 0.40 },
+                weak: { shadow: 0.40 }
+            },
+            dragao: {
+                strong: { raio: 0.20, normal: 0.20 },
+                weak: { normal: 0.50 }
+            }
+        };
+
         const CLASSES = {
             fogo: {
                 name: "Fogo",
                 avatar: "🔥",
                 color: "text-red-400",
                 badgeBg: "bg-red-950/60 text-red-400 border border-red-800",
-                strongAgainst: ["ar", "veneno"],
-                weakAgainst: ["agua", "terra"],
                 skills: [
                     { name: "Chama Veloz", type: "damage", power: 14, bonusUlt: true, desc: "Dano rápido (14) + Ganha +1 Carga Suprema extra!" },
                     { name: "Bola de Fogo", type: "damage", power: 24, desc: "Dano elemental de Fogo (24)." },
                     { name: "Explosão de Magma", type: "damage", power: 45, cooldownMax: 2, desc: "Dano Massivo (45). Recarrega em 2 turnos." },
-                    { name: "Chama Aumentada", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA ao usar várias vezes!)." },
-                    { name: "SUPERNOVA DEVASTADORA", type: "ultimate", power: 70, pierceShield: true, desc: "Dano apocalíptico (70) que atravessa 100% do escudo!" }
+                    { name: "Chama Aumentada", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA!)." },
+                    { name: "SUPERNOVA DEVASTADORA", type: "ultimate", power: 70, pierceShield: true, burnTurns: 2, burnDmg: 15, desc: "Dano (70) que atravessa escudos + Queima por 2 rodadas (-15 HP/rd)!" }
                 ]
             },
             agua: {
@@ -658,8 +739,6 @@
                 avatar: "💧",
                 color: "text-blue-400",
                 badgeBg: "bg-blue-950/60 text-blue-400 border border-blue-800",
-                strongAgainst: ["fogo", "terra"],
-                weakAgainst: ["raio", "veneno"],
                 skills: [
                     { name: "Gota Perfurante", type: "damage", power: 12, pierceShield: true, desc: "Dano rápido (12) que ignora todo o escudo inimigo." },
                     { name: "Jato d'Água", type: "damage", power: 22, desc: "Dano elemental de Água (22)." },
@@ -673,8 +752,6 @@
                 avatar: "🌿",
                 color: "text-emerald-400",
                 badgeBg: "bg-emerald-950/60 text-emerald-400 border border-emerald-800",
-                strongAgainst: ["agua", "raio"],
-                weakAgainst: ["ar", "fogo"],
                 skills: [
                     { name: "Lançar Cascalho", type: "damage", power: 12, addShield: 12, desc: "Dano rápido (12) + Ganha +12 de Escudo imediato." },
                     { name: "Pedrada Elemental", type: "damage", power: 23, desc: "Dano elemental de Terra (23)." },
@@ -688,8 +765,6 @@
                 avatar: "🌪️",
                 color: "text-cyan-400",
                 badgeBg: "bg-cyan-950/60 text-cyan-400 border border-cyan-800",
-                strongAgainst: ["terra", "veneno"],
-                weakAgainst: ["fogo", "raio"],
                 skills: [
                     { name: "Corte Preciso", type: "damage", power: 13, ignoreEvasion: true, desc: "Dano veloz (13) que atinge o alvo mesmo se ele esquivar." },
                     { name: "Lâmina de Vento", type: "damage", power: 23, desc: "Dano elemental de Ar (23)." },
@@ -703,8 +778,6 @@
                 avatar: "⚡",
                 color: "text-yellow-300",
                 badgeBg: "bg-yellow-950/60 text-yellow-300 border border-yellow-800",
-                strongAgainst: ["agua", "ar"],
-                weakAgainst: ["terra", "dragao"],
                 skills: [
                     { name: "Faísca Rápida", type: "damage", power: 15, bonusUlt: true, desc: "Raio veloz (15) +1 Carga Suprema extra." },
                     { name: "Descarga Elétrica", type: "damage", power: 25, desc: "Ataque elétrico de 25 de dano." },
@@ -718,14 +791,12 @@
                 avatar: "🧪",
                 color: "text-lime-400",
                 badgeBg: "bg-lime-950/60 text-lime-400 border border-lime-800",
-                strongAgainst: ["agua", "luz"],
-                weakAgainst: ["fogo", "ar"],
                 skills: [
                     { name: "Picada Tóxica", type: "damage", power: 13, bonusUlt: true, desc: "Dano tóxico rápido (13) +1 Carga Suprema extra." },
                     { name: "Bomba de Veneno", type: "damage", power: 24, desc: "Ataque corrosivo de 24 de dano." },
                     { name: "Líquido Corrosivo", type: "damage", power: 46, cooldownMax: 2, desc: "Dano corrosivo alto (46). Recarrega em 2 turnos." },
-                    { name: "Injeção de Toxina", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA ao usar mais vezes!)." },
-                    { name: "CATACLISMO TÓXICO", type: "ultimate", power: 75, pierceShield: true, desc: "Toxina apocalíptica de 75 de dano ignorando escudos!" }
+                    { name: "Injeção de Toxina", type: "buff", buffType: "damage_boost", cooldownMax: 1, desc: "+60% de dano na próxima habilidade (ACUMULA!)." },
+                    { name: "CATACLISMO TÓXICO", type: "ultimate", power: 75, pierceShield: true, poisonTurns: 4, poisonDmg: 10, desc: "Toxina de 75 dano ignorando escudos + Envenena 4 rodadas (-10 HP/rd)!" }
                 ]
             },
             normal: {
@@ -733,8 +804,6 @@
                 avatar: "⚔️",
                 color: "text-stone-300",
                 badgeBg: "bg-stone-800/70 text-stone-300 border border-stone-600",
-                strongAgainst: ["shadow", "veneno"],
-                weakAgainst: ["dragao", "luz"],
                 skills: [
                     { name: "Investida", type: "damage", power: 14, bonusUlt: true, desc: "Ataque físico rápido (14) +1 Carga Suprema." },
                     { name: "Golpe Preciso", type: "damage", power: 24, desc: "Ataque equilibrado de 24 de dano." },
@@ -748,8 +817,6 @@
                 avatar: "🌑",
                 color: "text-purple-400",
                 badgeBg: "bg-purple-950/60 text-purple-400 border border-purple-800",
-                strongAgainst: ["luz", "normal"],
-                weakAgainst: ["dragao", "veneno"],
                 skills: [
                     { name: "Sombra Rápida", type: "damage", power: 14, ignoreEvasion: true, desc: "Ataque sombrio (14) que ignora esquiva." },
                     { name: "Lâmina Sombria", type: "damage", power: 25, desc: "Corte das trevas de 25 de dano." },
@@ -763,8 +830,6 @@
                 avatar: "✨",
                 color: "text-yellow-100",
                 badgeBg: "bg-yellow-950/50 text-yellow-100 border border-yellow-700",
-                strongAgainst: ["shadow", "dragao"],
-                weakAgainst: ["normal", "veneno"],
                 skills: [
                     { name: "Raio Luminoso", type: "damage", power: 13, bonusUlt: true, desc: "Ataque de luz (13) +1 Carga Suprema." },
                     { name: "Lança Solar", type: "damage", power: 24, desc: "Energia solar de 24 de dano." },
@@ -778,14 +843,12 @@
                 avatar: "🐉",
                 color: "text-orange-400",
                 badgeBg: "bg-orange-950/60 text-orange-400 border border-orange-800",
-                strongAgainst: ["normal", "shadow"],
-                weakAgainst: ["luz", "raio"],
                 skills: [
                     { name: "Garra Dracônica", type: "damage", power: 16, bonusUlt: true, desc: "Garra veloz (16) +1 Carga Suprema." },
                     { name: "Sopro Dracônico", type: "damage", power: 27, desc: "Chama ancestral de 27 de dano." },
                     { name: "Mordida Colossal", type: "damage", power: 50, cooldownMax: 2, desc: "Ataque brutal de 50 de dano." },
                     { name: "Escamas Ancestrais", type: "shield", shieldVal: 42, cooldownMax: 1, desc: "Ganha 42 de escudo." },
-                    { name: "FÚRIA DO DRAGÃO ANCESTRAL", type: "ultimate", power: 80, breakShield: true, desc: "Poder ancestral: 80 de dano e destrói o escudo." }
+                    { name: "FÚRIA DO DRAGÃO ANCESTRAL", type: "ultimate", power: 80, breakShield: true, burnTurns: 2, burnDmg: 15, desc: "Poder ancestral (80) + Destrói escudo + Queima por 2 rodadas (-15 HP/rd)!" }
                 ]
             }
         };
@@ -799,8 +862,12 @@
                 maxHp: 250,
                 shield: 0,
                 ultWins: 0,
-                dmgBuffStacks: 0, // Acúmulo de dano bônus (+60% por pilha)
+                dmgBuffStacks: 0,
                 evasionBuff: false,
+                burnTurns: 0,
+                burnDmgPerTurn: 0,
+                poisonTurns: 0,
+                poisonDmgPerTurn: 0,
                 cooldowns: [0, 0, 0, 0, 0]
             },
             cpu: {
@@ -809,8 +876,12 @@
                 maxHp: 250,
                 shield: 0,
                 ultWins: 0,
-                dmgBuffStacks: 0, // Acúmulo de dano bônus para CPU
+                dmgBuffStacks: 0,
                 evasionBuff: false,
+                burnTurns: 0,
+                burnDmgPerTurn: 0,
+                poisonTurns: 0,
+                poisonDmgPerTurn: 0,
                 cooldowns: [0, 0, 0, 0, 0]
             },
             currentPhase: 'SELECTION',
@@ -820,135 +891,91 @@
 
         const WINS_REQUIRED_FOR_ULT = 5;
 
-        // Variaveis de Seleção Temporária
         let selectedRpsChoice = null;
         let selectedSkillIndex = null;
 
-        function selectPlayerClass(classKey) {
-            state.player.classKey = classKey;
-            
-            document.querySelectorAll('.class-card').forEach(card => {
-                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
-            });
-            const selectedCard = document.getElementById(`card-${classKey}`);
-            if (selectedCard) {
-                selectedCard.classList.add('border-amber-400', 'ring-2', 'ring-amber-400');
-            }
-
-            document.getElementById('btn-start-game').disabled = false;
-        }
-
-        function startGame() {
-            if (!state.player.classKey) return;
-
-            const nameInput = document.getElementById('player-name-input').value.trim();
-            state.playerName = nameInput || "Lutador";
-
-            const cpuSelectVal = document.getElementById('cpu-class-select').value;
-            if (cpuSelectVal === 'random') {
-                const keys = Object.keys(CLASSES);
-                state.cpu.classKey = keys[Math.floor(Math.random() * keys.length)];
-            } else {
-                state.cpu.classKey = cpuSelectVal;
-            }
-
-            document.getElementById('class-select-screen').classList.add('hidden');
-            document.getElementById('battle-screen').classList.remove('hidden');
-            const surrenderBtn = document.getElementById('surrender-btn');
-            if (surrenderBtn) surrenderBtn.classList.remove('hidden');
-
-            setupBattlefield();
-            state.currentPhase = 'RPS';
-            logMessage(`⚔️ A Batalha começou! Combate até a morte (250 HP).`, 'text-amber-400');
-        }
-
         function surrenderGame() {
             if (state.currentPhase === 'GAME_OVER' || state.currentPhase === 'SELECTION') return;
+            const modal = document.getElementById('surrender-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function cancelSurrender() {
+            const modal = document.getElementById('surrender-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function confirmSurrender() {
+            const modal = document.getElementById('surrender-modal');
+            if (modal) modal.classList.add('hidden');
+            
             logMessage(`🏳️ ${state.playerName} desistiu da batalha!`, 'text-rose-400');
             state.player.hp = 0;
             checkGameOver();
         }
 
-        function setupBattlefield() {
-            const pClass = CLASSES[state.player.classKey];
-            const cClass = CLASSES[state.cpu.classKey];
+        // CÁLCULO DE VANTAGENS E DESVANTAGENS ELEMENTAIS
+        function calculateElementalMultiplier(attackerClassKey, defenderClassKey) {
+            const rel = ELEMENTAL_RELATIONS[attackerClassKey];
+            if (!rel) return { mult: 1.0, text: "", type: "neutral" };
 
-            // Player UI
-            document.getElementById('player-avatar').innerText = pClass.avatar;
-            document.getElementById('player-name').innerText = state.playerName;
-            const pBadge = document.getElementById('player-class-badge');
-            pBadge.innerText = pClass.name;
-            pBadge.className = `inline-block text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${pClass.badgeBg}`;
-
-            // CPU UI
-            document.getElementById('cpu-avatar').innerText = cClass.avatar;
-            document.getElementById('cpu-name').innerText = "Inimigo";
-            const cBadge = document.getElementById('cpu-class-badge');
-            cBadge.innerText = cClass.name;
-            cBadge.className = `inline-block text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${cClass.badgeBg}`;
-
-            // Nomes e descrições dos botões de habilidade
-            pClass.skills.forEach((sk, idx) => {
-                const nameEl = document.getElementById(`skill-name-${idx}`);
-                const descEl = document.getElementById(`skill-desc-${idx}`);
-                if (nameEl) nameEl.innerText = sk.name;
-                if (descEl) descEl.innerText = sk.desc;
-            });
-
-            updateUI();
-        }
-
-        function reduceCooldowns() {
-            for (let i = 0; i < 5; i++) {
-                if (state.player.cooldowns[i] > 0) state.player.cooldowns[i]--;
-                if (state.cpu.cooldowns[i] > 0) state.cpu.cooldowns[i]--;
+            // Verificação de desvantagens específicas
+            if (rel.weak && rel.weak[defenderClassKey] !== undefined) {
+                const penalty = rel.weak[defenderClassKey];
+                const pct = Math.round(penalty * 100);
+                return { mult: 1 - penalty, text: ` (Desvantagem Elemental -${pct}%)`, type: "weak" };
             }
+
+            // Verificação de vantagens específicas
+            if (rel.strong && rel.strong[defenderClassKey] !== undefined) {
+                const bonus = rel.strong[defenderClassKey];
+                const pct = Math.round(bonus * 100);
+                return { mult: 1 + bonus, text: ` (Vantagem Elemental +${pct}%)`, type: "strong" };
+            }
+
+            // Bônus passivo para Raio contra todos os outros
+            if (rel.allBonus) {
+                const bonus = rel.allBonus;
+                const pct = Math.round(bonus * 100);
+                return { mult: 1 + bonus, text: ` (Bônus Raio +${pct}%)`, type: "strong" };
+            }
+
+            return { mult: 1.0, text: "", type: "neutral" };
         }
 
-        function selectRPS(choice) {
-            if (state.currentPhase !== 'RPS') return;
-            selectedRpsChoice = choice;
+        function processDoTEffects() {
+            ['player', 'cpu'].forEach(entityKey => {
+                const entity = state[entityKey];
+                const entityName = entityKey === 'player' ? "Você" : "O Inimigo";
+                const cardId = entityKey === 'player' ? 'player-card' : 'cpu-card';
 
-            const choices = ['pedra', 'papel', 'tesoura'];
-            const icons = { pedra: '✊', papel: '✋', tesoura: '✌️' };
+                // Efeito de Queimadura (Fogo & Dragão)
+                if (entity.burnTurns > 0) {
+                    entity.hp = Math.max(0, entity.hp - entity.burnDmgPerTurn);
+                    entity.burnTurns--;
+                    showDamagePopup(cardId, `-${entity.burnDmgPerTurn} 🔥`, 'text-orange-500');
+                    logMessage(`🔥 ${entityName} sofreu ${entity.burnDmgPerTurn} de dano por QUEIMADURA! (${entity.burnTurns} rodadas restantes)`, 'text-orange-400');
+                    triggerShake(cardId);
+                }
 
-            choices.forEach(c => {
-                const btn = document.getElementById(`rps-btn-${c}`);
-                if (c === choice) {
-                    btn.classList.add('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
-                    btn.classList.remove('border-slate-700', 'bg-slate-800');
-                } else {
-                    btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
-                    btn.classList.add('border-slate-700', 'bg-slate-800');
+                // Efeito de Envenenamento (Veneno)
+                if (entity.poisonTurns > 0) {
+                    entity.hp = Math.max(0, entity.hp - entity.poisonDmgPerTurn);
+                    entity.poisonTurns--;
+                    showDamagePopup(cardId, `-${entity.poisonDmgPerTurn} 🧪`, 'text-lime-500');
+                    logMessage(`🧪 ${entityName} sofreu ${entity.poisonDmgPerTurn} de dano por VENENO! (${entity.poisonTurns} rodadas restantes)`, 'text-lime-400');
+                    triggerShake(cardId);
                 }
             });
-
-            const confirmBtn = document.getElementById('btn-confirm-rps');
-            confirmBtn.disabled = false;
-            confirmBtn.innerText = `Confirmar ${choice.toUpperCase()} ${icons[choice]} ⚔️`;
-        }
-
-        function confirmRPS() {
-            if (!selectedRpsChoice || state.currentPhase !== 'RPS') return;
-
-            const choice = selectedRpsChoice;
-
-            selectedRpsChoice = null;
-            ['pedra', 'papel', 'tesoura'].forEach(c => {
-                const btn = document.getElementById(`rps-btn-${c}`);
-                btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'bg-slate-700/80');
-                btn.classList.add('border-slate-700', 'bg-slate-800');
-            });
-
-            const confirmBtn = document.getElementById('btn-confirm-rps');
-            confirmBtn.disabled = true;
-            confirmBtn.innerText = 'Confirmar Escolha ⚔️';
-
-            playRPS(choice);
         }
 
         function playRPS(playerChoice) {
             reduceCooldowns();
+
+            // Processa efeitos contínuos de Queimadura e Veneno antes da rodada
+            processDoTEffects();
+            checkGameOver();
+            if (state.currentPhase === 'GAME_OVER') return;
 
             const choices = ['pedra', 'papel', 'tesoura'];
             const cpuChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -987,112 +1014,6 @@
             updateUI();
         }
 
-        function selectSkill(index) {
-            if (state.currentPhase !== 'SKILL_SELECT') return;
-
-            const pClass = CLASSES[state.player.classKey];
-            const skill = pClass.skills[index];
-
-            if (state.player.cooldowns[index] > 0) return;
-            if (skill.type === 'ultimate' && state.player.ultWins < WINS_REQUIRED_FOR_ULT) return;
-
-            selectedSkillIndex = index;
-
-            pClass.skills.forEach((_, idx) => {
-                const btn = document.getElementById(`skill-btn-${idx}`);
-                if (idx === index) {
-                    btn.classList.add('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
-                } else {
-                    btn.classList.remove('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
-                }
-            });
-
-            const confirmBtn = document.getElementById('btn-confirm-skill');
-            confirmBtn.disabled = false;
-            confirmBtn.innerText = `Confirmar ${skill.name.toUpperCase()} 💥`;
-        }
-
-        function confirmSkill() {
-            if (selectedSkillIndex === null || state.currentPhase !== 'SKILL_SELECT') return;
-
-            const index = selectedSkillIndex;
-
-            selectedSkillIndex = null;
-            const pClass = CLASSES[state.player.classKey];
-            pClass.skills.forEach((_, idx) => {
-                const btn = document.getElementById(`skill-btn-${idx}`);
-                btn.classList.remove('ring-2', 'ring-amber-400', 'border-amber-400', 'bg-slate-700');
-            });
-
-            const confirmBtn = document.getElementById('btn-confirm-skill');
-            confirmBtn.disabled = true;
-            confirmBtn.innerText = 'Confirmar Habilidade 💥';
-
-            useSkill(index);
-        }
-
-        // CÁLCULO DE VANTAGENS E DESVANTAGENS ELEMENTAIS
-        function calculateElementalMultiplier(attackerClassKey, defenderClassKey) {
-            const attackerClass = CLASSES[attackerClassKey];
-            if (attackerClass.strongAgainst && attackerClass.strongAgainst.includes(defenderClassKey)) {
-                return { mult: 1.4, text: " (Vantagem Elemental! +40%)", type: "strong" };
-            } else if (attackerClass.weakAgainst && attackerClass.weakAgainst.includes(defenderClassKey)) {
-                return { mult: 0.75, text: " (Desvantagem Elemental -25%)", type: "weak" };
-            }
-            return { mult: 1.0, text: "", type: "neutral" };
-        }
-
-        function useSkill(skillIndex) {
-            const playerClass = CLASSES[state.player.classKey];
-            const skill = playerClass.skills[skillIndex];
-
-            if (skill.type === 'ultimate') {
-                state.player.ultWins -= WINS_REQUIRED_FOR_ULT;
-            }
-
-            if (skill.cooldownMax) {
-                state.player.cooldowns[skillIndex] = skill.cooldownMax + 1;
-            }
-
-            executeSkillEffect('player', 'cpu', skill);
-
-            showSkillPanel(false);
-            state.roundCount++;
-            state.currentPhase = 'RPS';
-            updateUI();
-            checkGameOver();
-        }
-
-        function executeCpuTurn() {
-            const cpuClass = CLASSES[state.cpu.classKey];
-            let chosenSkillIndex = 1;
-
-            if (state.cpu.ultWins >= WINS_REQUIRED_FOR_ULT) {
-                chosenSkillIndex = 4;
-                state.cpu.ultWins -= WINS_REQUIRED_FOR_ULT;
-            } else if (state.cpu.cooldowns[2] === 0 && Math.random() < 0.45) {
-                chosenSkillIndex = 2;
-            } else if (state.cpu.hp < 110 && state.cpu.cooldowns[3] === 0 && Math.random() < 0.6) {
-                chosenSkillIndex = 3;
-            } else if (Math.random() < 0.4) {
-                chosenSkillIndex = 0;
-            }
-
-            const skill = cpuClass.skills[chosenSkillIndex];
-
-            if (skill.cooldownMax) {
-                state.cpu.cooldowns[chosenSkillIndex] = skill.cooldownMax + 1;
-            }
-
-            executeSkillEffect('cpu', 'player', skill);
-
-            state.roundCount++;
-            state.currentPhase = 'RPS';
-            updateStatusBanner("Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!");
-            updateUI();
-            checkGameOver();
-        }
-
         function executeSkillEffect(casterKey, targetKey, skill) {
             const caster = state[casterKey];
             const target = state[targetKey];
@@ -1108,19 +1029,18 @@
                 return;
             }
 
-            // DANO (Com bônus acumulativo e multiplicador elemental)
+            // DANO
             if (skill.type === 'damage' || skill.type === 'ultimate') {
                 let basePower = skill.power || 0;
                 const elem = calculateElementalMultiplier(caster.classKey, target.classKey);
                 let finalDamage = Math.round(basePower * elem.mult);
 
-                // APLICAÇÃO DE DANO BÔNUS ACUMULADO (STACKING DAMAGE BOOST)
                 if (caster.dmgBuffStacks > 0) {
                     const stackMultiplier = 1 + (caster.dmgBuffStacks * 0.60);
                     const boostedDamage = Math.round(finalDamage * stackMultiplier);
                     logMessage(`🔥 DANO ACUMULADO DISPARADO! (+${caster.dmgBuffStacks * 60}% de Dano Bônus por ${caster.dmgBuffStacks} pilha(s))!`, 'text-orange-400');
                     finalDamage = boostedDamage;
-                    caster.dmgBuffStacks = 0; // Consome todos os acúmulos após disparar o golpe!
+                    caster.dmgBuffStacks = 0;
                 }
 
                 if (skill.breakShield && target.shield > 0) {
@@ -1146,6 +1066,19 @@
 
                 logMessage(`⚔️ ${casterName} usou [${skill.name}] causando ${finalDamage} de dano em ${targetName}${elem.text}!`, elem.type === 'strong' ? 'text-emerald-300' : (elem.type === 'weak' ? 'text-rose-300' : 'text-slate-200'));
 
+                // APLICAÇÃO DE PASSIVAS DAS SUPREMAS (QUEIMADURA E ENVENENAMENTO)
+                if (skill.burnTurns) {
+                    target.burnTurns = skill.burnTurns;
+                    target.burnDmgPerTurn = skill.burnDmg;
+                    logMessage(`🔥 ${targetName} ficou QUEIMADO por ${skill.burnTurns} rodadas (-${skill.burnDmg} HP por rodada)!`, 'text-orange-400');
+                }
+
+                if (skill.poisonTurns) {
+                    target.poisonTurns = skill.poisonTurns;
+                    target.poisonDmgPerTurn = skill.poisonDmg;
+                    logMessage(`🧪 ${targetName} ficou ENVENENADO por ${skill.poisonTurns} rodadas (-${skill.poisonDmg} HP por rodada)!`, 'text-lime-400');
+                }
+
                 if (skill.bonusUlt) {
                     caster.ultWins = Math.min(WINS_REQUIRED_FOR_ULT, caster.ultWins + 1);
                     logMessage(`⚡ ${casterName} ganhou +1 de Carga Suprema bônus com o Ataque Rápido!`, 'text-yellow-300');
@@ -1162,21 +1095,19 @@
                 }
             }
 
-            // CURA
+            // CURA & ESCUDOS
             if (skill.type === 'heal') {
                 caster.hp = Math.min(caster.maxHp, caster.hp + skill.healVal);
                 showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.healVal} HP`, 'text-emerald-400');
                 logMessage(`💚 ${casterName} usou [${skill.name}] e recuperou ${skill.healVal} de vida!`, 'text-emerald-400');
             }
 
-            // ESCUDO
             if (skill.type === 'shield') {
                 caster.shield += skill.shieldVal;
                 showDamagePopup(casterKey === 'player' ? 'player-card' : 'cpu-card', `+${skill.shieldVal} Escudo`, 'text-cyan-300');
                 logMessage(`🛡️ ${casterName} usou [${skill.name}] e colocou +${skill.shieldVal} de escudo!`, 'text-cyan-300');
             }
 
-            // BUFFS (Com suporte a ACÚMULO de Dano)
             if (skill.type === 'buff') {
                 if (skill.buffType === 'damage_boost') {
                     caster.dmgBuffStacks = (caster.dmgBuffStacks || 0) + 1;
@@ -1186,75 +1117,6 @@
                     caster.evasionBuff = true;
                     logMessage(`🌪️ ${casterName} usou [${skill.name}] e vai esquivar do próximo golpe!`, 'text-cyan-300');
                 }
-            }
-        }
-
-        function updateUI() {
-            // Player Bars
-            const pHpPct = Math.max(0, (state.player.hp / state.player.maxHp) * 100);
-            document.getElementById('player-hp-bar').style.width = `${pHpPct}%`;
-            document.getElementById('player-hp-text').innerText = `${state.player.hp} / ${state.player.maxHp}`;
-            
-            const pShieldPct = Math.min(100, (state.player.shield / 80) * 100);
-            document.getElementById('player-shield-bar').style.width = `${pShieldPct}%`;
-            document.getElementById('player-shield-text').innerText = state.player.shield;
-
-            // CPU Bars
-            const cHpPct = Math.max(0, (state.cpu.hp / state.cpu.maxHp) * 100);
-            document.getElementById('cpu-hp-bar').style.width = `${cHpPct}%`;
-            document.getElementById('cpu-hp-text').innerText = `${state.cpu.hp} / ${state.cpu.maxHp}`;
-
-            const cShieldPct = Math.min(100, (state.cpu.shield / 80) * 100);
-            document.getElementById('cpu-shield-bar').style.width = `${cShieldPct}%`;
-            document.getElementById('cpu-shield-text').innerText = state.cpu.shield;
-
-            renderUltTracker('player-ult-tracker', state.player.ultWins);
-            renderUltTracker('cpu-ult-tracker', state.cpu.ultWins);
-
-            renderBuffs('player-buffs', state.player);
-            renderBuffs('cpu-buffs', state.cpu);
-
-            updateSkillButtons();
-        }
-
-        function updateSkillButtons() {
-            if (!state.player.classKey) return;
-            const pClass = CLASSES[state.player.classKey];
-
-            pClass.skills.forEach((sk, idx) => {
-                const btn = document.getElementById(`skill-btn-${idx}`);
-                const descEl = document.getElementById(`skill-desc-${idx}`);
-                if (!btn) return;
-
-                const cd = state.player.cooldowns[idx];
-
-                if (idx === 4) { // Suprema
-                    if (state.player.ultWins >= WINS_REQUIRED_FOR_ULT) {
-                        btn.disabled = false;
-                        btn.classList.add('ultimate-ready', 'border-amber-400', 'bg-amber-950/40');
-                        descEl.innerText = "🌟 PRONTA PARA USAR!";
-                    } else {
-                        btn.disabled = true;
-                        btn.classList.remove('ultimate-ready', 'border-amber-400', 'bg-amber-950/40');
-                        descEl.innerText = `Requer ${WINS_REQUIRED_FOR_ULT - state.player.ultWins} vitórias em PPT!`;
-                    }
-                } else if (cd > 0) { // Em Recarga
-                    btn.disabled = true;
-                    descEl.innerText = `⏳ Recarregando (${cd} rodada${cd > 1 ? 's' : ''})...`;
-                } else {
-                    btn.disabled = false;
-                    descEl.innerText = sk.desc;
-                }
-            });
-        }
-
-        function renderUltTracker(containerId, wins) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            for (let i = 0; i < WINS_REQUIRED_FOR_ULT; i++) {
-                const dot = document.createElement('span');
-                dot.className = `inline-block w-3 h-3 rounded-full border border-amber-500/50 ${i < wins ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 'bg-slate-800'}`;
-                container.appendChild(dot);
             }
         }
 
@@ -1275,170 +1137,25 @@
                 b.innerText = '🌪️ Esquiva Pronta';
                 container.appendChild(b);
             }
-        }
 
-        function showSkillPanel(show) {
-            const rpsCtrl = document.getElementById('rps-controls');
-            const skillCtrl = document.getElementById('skill-controls');
-
-            selectedSkillIndex = null;
-            const confirmSkillBtn = document.getElementById('btn-confirm-skill');
-            confirmSkillBtn.disabled = true;
-            confirmSkillBtn.innerText = 'Confirmar Habilidade 💥';
-
-            if (show) {
-                rpsCtrl.classList.add('hidden');
-                skillCtrl.classList.remove('hidden');
-            } else {
-                skillCtrl.classList.add('hidden');
-                rpsCtrl.classList.remove('hidden');
-            }
-        }
-
-        function updateStatusBanner(text) {
-            const banner = document.getElementById('round-status-banner');
-            banner.innerText = text;
-        }
-
-        function logMessage(msg, colorClass = 'text-slate-200') {
-            const log = document.getElementById('combat-log');
-            const p = document.createElement('p');
-            p.className = `${colorClass} transition-opacity duration-300`;
-            p.innerText = msg;
-            log.appendChild(p);
-            log.scrollTop = log.scrollHeight;
-        }
-
-        function triggerShake(elementId) {
-            const el = document.getElementById(elementId);
-            el.classList.add('shake-animation');
-            setTimeout(() => el.classList.remove('shake-animation'), 400);
-        }
-
-        function showDamagePopup(targetCardId, text, colorClass) {
-            const card = document.getElementById(targetCardId);
-            const popup = document.createElement('div');
-            popup.className = `damage-popup text-2xl ${colorClass} left-1/2 top-1/3 -translate-x-1/2`;
-            popup.innerText = text;
-            card.appendChild(popup);
-
-            setTimeout(() => popup.remove(), 1200);
-        }
-
-        function checkGameOver() {
-            if (state.player.hp <= 0 || state.cpu.hp <= 0) {
-                state.currentPhase = 'GAME_OVER';
-                
-                const surrenderBtn = document.getElementById('surrender-btn');
-                if (surrenderBtn) surrenderBtn.classList.add('hidden');
-
-                const modal = document.getElementById('game-over-modal');
-                const title = document.getElementById('modal-title');
-                const desc = document.getElementById('modal-desc');
-                const icon = document.getElementById('modal-icon');
-                const rankBadge = document.getElementById('modal-rank-badge');
-
-                modal.classList.remove('hidden');
-
-                if (state.player.hp <= 0 && state.cpu.hp <= 0) {
-                    icon.innerText = "⚖️";
-                    title.innerText = "Empate Perfeito!";
-                    desc.innerText = "Ambos os lutadores caíram exaustos na arena ao mesmo tempo.";
-                    rankBadge.classList.add('hidden');
-                } else if (state.player.hp > 0) {
-                    icon.innerText = "🏆";
-                    title.innerText = "Vitória Gloriosa!";
-                    title.className = "text-3xl font-black font-title mb-2 text-emerald-400";
-                    desc.innerText = `Você eliminou o oponente após ${state.roundCount} rodadas intensas de combate!`;
-
-                    const position = recordWinRanking(state.playerName, state.player.classKey, state.player.hp, state.player.maxHp, state.roundCount);
-                    
-                    rankBadge.innerHTML = `🌟 <strong>Pontuação no Ranking:</strong> ${state.player.hp}/${state.player.maxHp} HP Sobrando<br><span class="text-amber-400 font-bold">Você alcançou a Posição #${position} no Ranking!</span>`;
-                    rankBadge.classList.remove('hidden');
-                } else {
-                    icon.innerText = "💀";
-                    title.innerText = "Derrota...";
-                    title.className = "text-3xl font-black font-title mb-2 text-rose-500";
-                    desc.innerText = "Sua vida chegou a zero nesta batalha elemental.";
-                    rankBadge.classList.add('hidden');
-                }
-            }
-        }
-
-        function recordWinRanking(name, classKey, hpRemaining, maxHp, rounds) {
-            const entry = {
-                name: name,
-                classKey: classKey,
-                hpRemaining: hpRemaining,
-                maxHp: maxHp,
-                rounds: rounds
-            };
-
-            state.rankings.push(entry);
-            state.rankings.sort((a, b) => {
-                if (b.hpRemaining !== a.hpRemaining) {
-                    return b.hpRemaining - a.hpRemaining;
-                }
-                return a.rounds - b.rounds;
-            });
-
-            // Salva o ranking dos jogadores no navegador
-            try {
-                localStorage.setItem('arena_rankings', JSON.stringify(state.rankings));
-            } catch(e) {}
-
-            renderRanking();
-
-            const idx = state.rankings.findIndex(r => r === entry);
-            return idx !== -1 ? idx + 1 : state.rankings.length;
-        }
-
-        function renderRanking() {
-            const tbody = document.getElementById('ranking-table-body');
-            if (!tbody) return;
-
-            tbody.innerHTML = '';
-
-            if (state.rankings.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-500 italic">Nenhum registro no ranking ainda. Vença uma batalha para aparecer aqui!</td></tr>';
-                return;
+            if (entity.burnTurns > 0) {
+                const b = document.createElement('span');
+                b.className = 'text-[10px] bg-orange-950/80 text-orange-300 border border-orange-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1 shadow-sm';
+                b.innerText = `🔥 Queimado (${entity.burnTurns}r)`;
+                container.appendChild(b);
             }
 
-            state.rankings.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                tr.className = index < 3 ? 'bg-amber-500/10 hover:bg-amber-500/20' : 'hover:bg-slate-800/50';
-
-                let posBadge = `${index + 1}º`;
-                if (index === 0) posBadge = "🥇 1º";
-                else if (index === 1) posBadge = "🥈 2º";
-                else if (index === 2) posBadge = "🥉 3º";
-
-                const cls = CLASSES[item.classKey] || { avatar: '⚔️', name: item.classKey };
-
-                tr.innerHTML = `
-                    <td class="p-2.5 font-bold ${index === 0 ? 'text-amber-400' : 'text-slate-300'}">${posBadge}</td>
-                    <td class="p-2.5 font-bold text-slate-100">${item.name}</td>
-                    <td class="p-2.5 flex items-center gap-1"><span class="text-base">${cls.avatar}</span> <span class="capitalize text-[11px]">${cls.name}</span></td>
-                    <td class="p-2.5 text-right font-black text-emerald-400">${item.hpRemaining} HP <span class="text-[10px] text-slate-400 font-normal">(${item.rounds} rds)</span></td>
-                `;
-
-                tbody.appendChild(tr);
-            });
-        }
-
-        function toggleRankingModal() {
-            const modal = document.getElementById('ranking-modal');
-            if (modal) {
-                modal.classList.toggle('hidden');
-                if (!modal.classList.contains('hidden')) {
-                    renderRanking();
-                }
+            if (entity.poisonTurns > 0) {
+                const b = document.createElement('span');
+                b.className = 'text-[10px] bg-lime-950/80 text-lime-300 border border-lime-600 px-2 py-0.5 rounded-md font-bold flex items-center gap-1 shadow-sm';
+                b.innerText = `🧪 Envenenado (${entity.poisonTurns}r)`;
+                container.appendChild(b);
             }
         }
 
         function resetGame() {
-            state.player = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
-            state.cpu = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, cooldowns: [0, 0, 0, 0, 0] };
+            state.player = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, burnTurns: 0, burnDmgPerTurn: 0, poisonTurns: 0, poisonDmgPerTurn: 0, cooldowns: [0, 0, 0, 0, 0] };
+            state.cpu = { hp: 250, maxHp: 250, shield: 0, ultWins: 0, dmgBuffStacks: 0, evasionBuff: false, burnTurns: 0, burnDmgPerTurn: 0, poisonTurns: 0, poisonDmgPerTurn: 0, cooldowns: [0, 0, 0, 0, 0] };
             state.currentPhase = 'SELECTION';
             state.roundCount = 1;
 
@@ -1447,6 +1164,8 @@
 
             const surrenderBtn = document.getElementById('surrender-btn');
             if (surrenderBtn) surrenderBtn.classList.add('hidden');
+
+            cancelSurrender();
 
             document.getElementById('game-over-modal').classList.add('hidden');
             document.getElementById('battle-screen').classList.add('hidden');
@@ -1469,6 +1188,402 @@
 
             showSkillPanel(false);
             updateStatusBanner("Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!");
+        }
+
+        // Seleção de classe pelo jogador
+        function selectPlayerClass(classKey) {
+            state.player.classKey = classKey;
+            document.querySelectorAll('.class-card').forEach(card => {
+                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
+            });
+            const selectedCard = document.getElementById(`card-${classKey}`);
+            if (selectedCard) {
+                selectedCard.classList.add('border-amber-400', 'ring-2', 'ring-amber-400');
+            }
+            document.getElementById('btn-start-game').disabled = false;
+        }
+
+        // Inicia a partida na arena
+        function startGame() {
+            const nameInput = document.getElementById('player-name-input');
+            state.playerName = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : "Lutador";
+
+            const cpuSelect = document.getElementById('cpu-class-select');
+            let cpuClass = cpuSelect ? cpuSelect.value : 'random';
+            if (cpuClass === 'random') {
+                const classKeys = Object.keys(CLASSES);
+                cpuClass = classKeys[Math.floor(Math.random() * classKeys.length)];
+            }
+            state.cpu.classKey = cpuClass;
+
+            const pClass = CLASSES[state.player.classKey];
+            const cClass = CLASSES[state.cpu.classKey];
+
+            // Atualiza elementos de UI dos Lutadores
+            document.getElementById('player-name').innerText = state.playerName;
+            document.getElementById('player-avatar').innerText = pClass.avatar;
+            const pBadge = document.getElementById('player-class-badge');
+            pBadge.innerText = pClass.name;
+            pBadge.className = `inline-block text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${pClass.badgeBg}`;
+
+            document.getElementById('cpu-name').innerText = `Oponente (${cClass.name})`;
+            document.getElementById('cpu-avatar').innerText = cClass.avatar;
+            const cBadge = document.getElementById('cpu-class-badge');
+            cBadge.innerText = cClass.name;
+            cBadge.className = `inline-block text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${cClass.badgeBg}`;
+
+            // Exibe telas apropriadas
+            document.getElementById('class-select-screen').classList.add('hidden');
+            document.getElementById('battle-screen').classList.remove('hidden');
+            document.getElementById('surrender-btn').classList.remove('hidden');
+
+            state.currentPhase = 'RPS_SELECT';
+            updateUI();
+            logMessage(`⚔️ Batalha iniciada! ${state.playerName} (${pClass.name}) vs CPU (${cClass.name}).`, 'text-amber-300 font-bold');
+        }
+
+        // Seleção de Pedra, Papel ou Tesoura
+        function selectRPS(choice) {
+            selectedRpsChoice = choice;
+            ['pedra', 'papel', 'tesoura'].forEach(c => {
+                const btn = document.getElementById(`rps-btn-${c}`);
+                if (c === choice) {
+                    btn.classList.add('border-amber-400', 'bg-amber-950/40', 'ring-2', 'ring-amber-400/50');
+                } else {
+                    btn.classList.remove('border-amber-400', 'bg-amber-950/40', 'ring-2', 'ring-amber-400/50');
+                }
+            });
+            const btnConfirm = document.getElementById('btn-confirm-rps');
+            btnConfirm.disabled = false;
+            btnConfirm.innerText = `Confirmar ${choice.toUpperCase()} ⚔️`;
+        }
+
+        function confirmRPS() {
+            if (!selectedRpsChoice) return;
+            const choice = selectedRpsChoice;
+            selectedRpsChoice = null;
+            ['pedra', 'papel', 'tesoura'].forEach(c => {
+                const btn = document.getElementById(`rps-btn-${c}`);
+                btn.classList.remove('border-amber-400', 'bg-amber-950/40', 'ring-2', 'ring-amber-400/50');
+            });
+            const btnConfirm = document.getElementById('btn-confirm-rps');
+            btnConfirm.disabled = true;
+            btnConfirm.innerText = 'Confirmar Escolha ⚔️';
+
+            playRPS(choice);
+        }
+
+        function showSkillPanel(show) {
+            const rpsControls = document.getElementById('rps-controls');
+            const skillControls = document.getElementById('skill-controls');
+            if (show) {
+                rpsControls.classList.add('hidden');
+                skillControls.classList.remove('hidden');
+            } else {
+                rpsControls.classList.remove('hidden');
+                skillControls.classList.add('hidden');
+            }
+        }
+
+        function selectSkill(index) {
+            if (state.player.cooldowns[index] > 0) return;
+            if (index === 4 && state.player.ultWins < WINS_REQUIRED_FOR_ULT) return;
+
+            selectedSkillIndex = index;
+            for (let i = 0; i < 5; i++) {
+                const btn = document.getElementById(`skill-btn-${i}`);
+                if (i === index) {
+                    btn.classList.add('border-amber-400', 'ring-2', 'ring-amber-400');
+                } else {
+                    btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
+                }
+            }
+
+            const btnConfirm = document.getElementById('btn-confirm-skill');
+            btnConfirm.disabled = false;
+            const pClass = CLASSES[state.player.classKey];
+            btnConfirm.innerText = `Lançar [${pClass.skills[index].name}] 💥`;
+        }
+
+        function confirmSkill() {
+            if (selectedSkillIndex === null) return;
+            const index = selectedSkillIndex;
+            selectedSkillIndex = null;
+
+            for (let i = 0; i < 5; i++) {
+                const btn = document.getElementById(`skill-btn-${i}`);
+                btn.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
+            }
+
+            const btnConfirm = document.getElementById('btn-confirm-skill');
+            btnConfirm.disabled = true;
+            btnConfirm.innerText = 'Confirmar Habilidade 💥';
+
+            const pClass = CLASSES[state.player.classKey];
+            const skill = pClass.skills[index];
+
+            if (skill.cooldownMax) {
+                state.player.cooldowns[index] = skill.cooldownMax + 1;
+            }
+
+            if (index === 4) {
+                state.player.ultWins = 0;
+            }
+
+            executeSkillEffect('player', 'cpu', skill);
+            showSkillPanel(false);
+
+            checkGameOver();
+            if (state.currentPhase !== 'GAME_OVER') {
+                state.roundCount++;
+                state.currentPhase = 'RPS_SELECT';
+                updateStatusBanner("Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!");
+                updateUI();
+            }
+        }
+
+        function executeCpuTurn() {
+            if (state.currentPhase === 'GAME_OVER') return;
+
+            const cClass = CLASSES[state.cpu.classKey];
+            let skillIndex = 1;
+
+            if (state.cpu.ultWins >= WINS_REQUIRED_FOR_ULT) {
+                skillIndex = 4;
+                state.cpu.ultWins = 0;
+            } else {
+                const availableIndices = [];
+                for (let i = 0; i < 4; i++) {
+                    if (state.cpu.cooldowns[i] === 0) availableIndices.push(i);
+                }
+                if (availableIndices.length > 0) {
+                    skillIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+                }
+            }
+
+            const skill = cClass.skills[skillIndex];
+            if (skill.cooldownMax) {
+                state.cpu.cooldowns[skillIndex] = skill.cooldownMax + 1;
+            }
+
+            executeSkillEffect('cpu', 'player', skill);
+
+            checkGameOver();
+            if (state.currentPhase !== 'GAME_OVER') {
+                state.roundCount++;
+                state.currentPhase = 'RPS_SELECT';
+                updateStatusBanner("Fase de Escolha: Selecione Pedra, Papel ou Tesoura e confirme!");
+                updateUI();
+            }
+        }
+
+        function reduceCooldowns() {
+            for (let i = 0; i < 5; i++) {
+                if (state.player.cooldowns[i] > 0) state.player.cooldowns[i]--;
+                if (state.cpu.cooldowns[i] > 0) state.cpu.cooldowns[i]--;
+            }
+        }
+
+        function updateUI() {
+            // HP Jogador
+            const pHpPct = Math.max(0, (state.player.hp / state.player.maxHp) * 100);
+            document.getElementById('player-hp-bar').style.width = `${pHpPct}%`;
+            document.getElementById('player-hp-text').innerText = `${state.player.hp} / ${state.player.maxHp}`;
+
+            // HP CPU
+            const cHpPct = Math.max(0, (state.cpu.hp / state.cpu.maxHp) * 100);
+            document.getElementById('cpu-hp-bar').style.width = `${cHpPct}%`;
+            document.getElementById('cpu-hp-text').innerText = `${state.cpu.hp} / ${state.cpu.maxHp}`;
+
+            // Escudos
+            const pShieldBar = document.getElementById('player-shield-bar');
+            pShieldBar.style.width = `${Math.min(100, state.player.shield)}%`;
+            document.getElementById('player-shield-text').innerText = state.player.shield;
+
+            const cShieldBar = document.getElementById('cpu-shield-bar');
+            cShieldBar.style.width = `${Math.min(100, state.cpu.shield)}%`;
+            document.getElementById('cpu-shield-text').innerText = state.cpu.shield;
+
+            // Rastreador de Suprema
+            const pUltTracker = document.getElementById('player-ult-tracker');
+            pUltTracker.innerHTML = '';
+            for (let i = 0; i < WINS_REQUIRED_FOR_ULT; i++) {
+                const dot = document.createElement('span');
+                dot.className = `w-3 h-3 rounded-full border border-amber-500 ${i < state.player.ultWins ? 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]' : 'bg-slate-800'}`;
+                pUltTracker.appendChild(dot);
+            }
+
+            const cUltTracker = document.getElementById('cpu-ult-tracker');
+            cUltTracker.innerHTML = '';
+            for (let i = 0; i < WINS_REQUIRED_FOR_ULT; i++) {
+                const dot = document.createElement('span');
+                dot.className = `w-3 h-3 rounded-full border border-rose-500 ${i < state.cpu.ultWins ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]' : 'bg-slate-800'}`;
+                cUltTracker.appendChild(dot);
+            }
+
+            // Buffs
+            renderBuffs('player-buffs', state.player);
+            renderBuffs('cpu-buffs', state.cpu);
+
+            // Botões de Habilidade do Jogador
+            if (state.player.classKey && CLASSES[state.player.classKey]) {
+                const pClass = CLASSES[state.player.classKey];
+                pClass.skills.forEach((skill, idx) => {
+                    const nameEl = document.getElementById(`skill-name-${idx}`);
+                    const descEl = document.getElementById(`skill-desc-${idx}`);
+                    const btn = document.getElementById(`skill-btn-${idx}`);
+
+                    if (nameEl) nameEl.innerText = skill.name;
+                    if (descEl) {
+                        if (state.player.cooldowns[idx] > 0) {
+                            descEl.innerText = `⏳ Recarga: ${state.player.cooldowns[idx]} turno(s)`;
+                        } else {
+                            descEl.innerText = skill.desc;
+                        }
+                    }
+
+                    if (btn) {
+                        const isOnCooldown = state.player.cooldowns[idx] > 0;
+                        const isUltNotReady = (idx === 4 && state.player.ultWins < WINS_REQUIRED_FOR_ULT);
+                        btn.disabled = isOnCooldown || isUltNotReady;
+
+                        if (idx === 4 && state.player.ultWins >= WINS_REQUIRED_FOR_ULT) {
+                            btn.classList.add('ultimate-ready', 'border-amber-400');
+                        } else {
+                            btn.classList.remove('ultimate-ready');
+                        }
+                    }
+                });
+            }
+        }
+
+        function updateStatusBanner(text) {
+            const banner = document.getElementById('round-status-banner');
+            if (banner) banner.innerText = text;
+        }
+
+        function logMessage(msg, colorClass = 'text-slate-200') {
+            const log = document.getElementById('combat-log');
+            if (!log) return;
+            const p = document.createElement('p');
+            p.className = `${colorClass} leading-relaxed`;
+            p.innerHTML = msg;
+            log.appendChild(p);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function showDamagePopup(cardId, text, colorClass = 'text-red-500') {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            const popup = document.createElement('div');
+            popup.className = `damage-popup text-2xl ${colorClass} left-1/2 top-1/3 -translate-x-1/2`;
+            popup.innerText = text;
+            card.appendChild(popup);
+            setTimeout(() => popup.remove(), 1200);
+        }
+
+        function triggerShake(cardId) {
+            const card = document.getElementById(cardId);
+            if (!card) return;
+            card.classList.add('shake-animation');
+            setTimeout(() => card.classList.remove('shake-animation'), 400);
+        }
+
+        function checkGameOver() {
+            if (state.player.hp <= 0 || state.cpu.hp <= 0) {
+                state.currentPhase = 'GAME_OVER';
+                const modal = document.getElementById('game-over-modal');
+                const modalTitle = document.getElementById('modal-title');
+                const modalDesc = document.getElementById('modal-desc');
+                const modalIcon = document.getElementById('modal-icon');
+                const rankBadge = document.getElementById('modal-rank-badge');
+
+                modal.classList.remove('hidden');
+
+                if (state.player.hp > 0 && state.cpu.hp <= 0) {
+                    modalIcon.innerText = "🏆";
+                    modalTitle.innerText = "Vitória Gloriosa!";
+                    modalTitle.className = "text-3xl font-black font-title mb-2 text-amber-400";
+                    modalDesc.innerText = `Você derrotou o oponente com ${state.player.hp} HP restantes!`;
+
+                    const entry = {
+                        name: state.playerName,
+                        classKey: state.player.classKey,
+                        hpLeft: state.player.hp,
+                        date: new Date().toLocaleDateString('pt-BR')
+                    };
+                    state.rankings.push(entry);
+                    state.rankings.sort((a, b) => b.hpLeft - a.hpLeft);
+                    try {
+                        localStorage.setItem('arena_rankings', JSON.stringify(state.rankings));
+                    } catch(e) {}
+
+                    const rankPos = state.rankings.indexOf(entry) + 1;
+                    rankBadge.innerHTML = `🌟 <strong>Novo Recorde Registrado!</strong><br>Posição #${rankPos} no Ranking com <strong>${state.player.hp} HP</strong> restantes.`;
+                    rankBadge.classList.remove('hidden');
+                    renderRanking();
+                } else {
+                    modalIcon.innerText = "💀";
+                    modalTitle.innerText = "Derrota na Arena";
+                    modalTitle.className = "text-3xl font-black font-title mb-2 text-rose-500";
+                    modalDesc.innerText = "Seu HP chegou a zero. Treine mais e tente novamente!";
+                    rankBadge.classList.add('hidden');
+                }
+            }
+        }
+
+        function toggleRankingModal() {
+            const modal = document.getElementById('ranking-modal');
+            if (!modal) return;
+            const isHidden = modal.classList.contains('hidden');
+            if (isHidden) {
+                renderRanking();
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function renderRanking() {
+            const tbody = document.getElementById('ranking-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (state.rankings.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500 italic">Nenhum campeão registrado ainda. Vença uma batalha para entrar no ranking!</td></tr>`;
+                return;
+            }
+
+            state.rankings.slice(0, 10).forEach((entry, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = idx % 2 === 0 ? 'bg-slate-900/40' : 'bg-slate-950/40';
+                const cData = CLASSES[entry.classKey] || { name: entry.classKey, avatar: '⚔️' };
+
+                let posBadge = `<span class="font-bold text-slate-400">#${idx + 1}</span>`;
+                if (idx === 0) posBadge = `<span class="text-amber-400 font-bold">🥇 1º</span>`;
+                else if (idx === 1) posBadge = `<span class="text-slate-300 font-bold">🥈 2º</span>`;
+                else if (idx === 2) posBadge = `<span class="text-amber-600 font-bold">🥉 3º</span>`;
+
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold">${posBadge}</td>
+                    <td class="p-2.5 font-semibold text-slate-200">${entry.name}</td>
+                    <td class="p-2.5 flex items-center gap-1.5"><span class="text-base">${cData.avatar}</span> <span>${cData.name}</span></td>
+                    <td class="p-2.5 text-right font-bold text-emerald-400">${entry.hpLeft} HP</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function clearRanking() {
+            if (state.rankings.length === 0) return;
+            
+            // Pergunta confirmation sem usar alert/confirm padrão nativo
+            state.rankings = [];
+            try {
+                localStorage.removeItem('arena_rankings');
+            } catch(e) {}
+            
+            renderRanking();
         }
 
         function toggleTheme() {
