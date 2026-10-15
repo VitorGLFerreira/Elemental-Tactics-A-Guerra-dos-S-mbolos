@@ -176,6 +176,26 @@
 
         body.light-mode ::-webkit-scrollbar-track { background: #e2e8f0; }
         body.light-mode ::-webkit-scrollbar-thumb { background: #94a3b8; }
+
+        /* Efeitos dos cards */
+        .class-card{z-index:1}
+        .class-card.is-picked{z-index:2;animation:card-pop .5s ease-out}
+        @keyframes card-pop{0%{transform:scale(1)}40%{transform:scale(1.07) rotate(-1.5deg)}70%{transform:scale(1.03) rotate(1deg)}100%{transform:scale(1.02)}}
+        .fx-back{position:absolute;inset:0;z-index:40;pointer-events:none}
+        .fx-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:30;border-radius:inherit}
+        .fx-p{position:absolute;pointer-events:none;will-change:transform,opacity;animation:fx var(--dur) ease-out forwards}
+        @keyframes fx{
+            0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(0)}
+            15%{opacity:1}
+            100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--s)) rotate(var(--rot))}
+        }
+        .fx-e{position:absolute;pointer-events:none;line-height:1;will-change:transform,opacity;animation:fx-emoji var(--dur) cubic-bezier(.2,.7,.3,1) var(--delay,0s) both;filter:drop-shadow(0 0 8px var(--glow,#fff))}
+        @keyframes fx-emoji{
+            0%{opacity:0;transform:translate(-50%,-50%) scale(.3) rotate(0)}
+            15%{opacity:1}
+            70%{opacity:1}
+            100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--s)) rotate(var(--rot))}
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-slate-950 text-slate-100 overflow-x-hidden">
@@ -212,7 +232,7 @@
             </div>
 
             <!-- Grid de Seleção de Classes (10 Elementos) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
+            <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
                 <!-- Fogo -->
                 <div onclick="selectPlayerClass('fogo')" id="card-fogo" class="class-card cursor-pointer bg-slate-800/80 border-2 border-slate-700 hover:border-red-500 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
                     <div class="text-4xl mb-2 text-center">🔥</div>
@@ -1175,7 +1195,7 @@
             document.getElementById('btn-start-game').disabled = true;
 
             document.querySelectorAll('.class-card').forEach(card => {
-                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400');
+                card.classList.remove('border-amber-400', 'ring-2', 'ring-amber-400', 'is-picked');
             });
 
             const confirmRpsBtn = document.getElementById('btn-confirm-rps');
@@ -1199,6 +1219,7 @@
             const selectedCard = document.getElementById(`card-${classKey}`);
             if (selectedCard) {
                 selectedCard.classList.add('border-amber-400', 'ring-2', 'ring-amber-400');
+                triggerSelectFx(classKey);
             }
             document.getElementById('btn-start-game').disabled = false;
         }
@@ -1614,6 +1635,117 @@
 
             renderRanking();
         });
+
+        // ====== EFEITOS DOS CARDS ======
+        const rnd = (a, b) => a + Math.random() * (b - a);
+
+        // Hover: partículas seguindo o mouse
+        const FX = {
+            fogo:   { bg:'radial-gradient(circle at 50% 70%,#fff7ae 0%,#fbbf24 30%,#ef4444 60%,transparent 72%)', r:'50% 50% 50% 50%/65% 65% 35% 35%', w:[16,36], dx:[-28,28], dy:[-80,-150], dur:[.7,1.3], blend:'screen', glow:'#f97316', s:.2, rot:[-25,25] },
+            agua:   { bg:'radial-gradient(circle at 35% 30%,#fff 0,#bfdbfe 22%,rgba(59,130,246,.45) 60%,rgba(59,130,246,.1) 100%)', r:'50%', border:'1px solid rgba(191,219,254,.8)', w:[8,22], dx:[-25,25], dy:[-60,-120], dur:[.9,1.5], s:1.1, rot:[0,0] },
+            terra:  { bg:'linear-gradient(135deg,#86efac,#15803d)', r:'0 75% 0 75%', w:[9,18], dx:[-45,45], dy:[60,120], dur:[.9,1.5], s:.8, rot:[-280,280] },
+            ar:     { bg:'transparent', r:'50%', border:'2px solid rgba(207,250,254,.85)', bt:'transparent', w:[14,34], dx:[-70,70], dy:[-20,-60], dur:[.7,1.2], s:1.5, rot:[360,720], glow:'#22d3ee' },
+            raio:   { bg:'linear-gradient(#fff,#fde047)', r:'2px', w:[2,4], h:[18,40], dx:[-45,45], dy:[-50,50], dur:[.25,.5], s:.6, rot:[-70,70], glow:'#facc15', blend:'screen' },
+            veneno: { bg:'radial-gradient(circle at 35% 30%,#ecfccb,#84cc16 45%,rgba(101,163,13,.3) 100%)', r:'50%', border:'1px solid #a3e635', w:[8,22], dx:[-20,20], dy:[-50,-100], dur:[1,1.7], s:1.3, rot:[0,0], glow:'#84cc16' },
+            normal: { bg:'radial-gradient(circle,#fff,#d6d3d1 50%,transparent 75%)', r:'50%', w:[4,9], dx:[-55,55], dy:[-55,55], dur:[.4,.7], s:.2, rot:[0,0], blend:'screen' },
+            shadow: { bg:'radial-gradient(circle,rgba(126,34,206,.9),rgba(15,5,30,.6) 50%,transparent 72%)', r:'50%', w:[24,48], dx:[-30,30], dy:[-40,-90], dur:[1.1,1.8], s:1.8, rot:[0,0] },
+            luz:    { bg:'radial-gradient(circle,#fff,#fef08a 40%,transparent 72%)', r:'50%', w:[7,18], dx:[-45,45], dy:[-40,-100], dur:[.9,1.5], s:.3, rot:[0,0], glow:'#fde047', blend:'screen' },
+            dragao: { bg:'radial-gradient(circle at 50% 70%,#fef3c7 0%,#fb923c 32%,#9a3412 62%,transparent 74%)', r:'50% 50% 50% 50%/65% 65% 35% 35%', w:[16,38], dx:[-35,35], dy:[-90,-160], dur:[.7,1.3], blend:'screen', glow:'#ea580c', s:.2, rot:[-30,30] }
+        };
+
+        function spawnParticle(layer, key, x, y) {
+            const f = FX[key]; if (!f) return;
+            const p = document.createElement('div');
+            const w = rnd(f.w[0], f.w[1]), h = f.h ? rnd(f.h[0], f.h[1]) : w;
+            p.className = 'fx-p';
+            p.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${f.bg};border-radius:${f.r};` +
+                (f.border ? `border:${f.border};` : '') + (f.bt ? `border-top-color:${f.bt};` : '') +
+                (f.blend ? `mix-blend-mode:${f.blend};` : '') + (f.glow ? `box-shadow:0 0 ${w}px ${f.glow};` : '') +
+                `--dx:${rnd(f.dx[0], f.dx[1])}px;--dy:${rnd(f.dy[0], f.dy[1])}px;--s:${f.s};--rot:${rnd(f.rot[0], f.rot[1])}deg;--dur:${rnd(f.dur[0], f.dur[1])}s;`;
+            layer.appendChild(p);
+            setTimeout(() => p.remove(), f.dur[1] * 1000 + 100);
+        }
+
+        // Seleção: emojis que saem de trás do card
+        // dir: 'up' sobe, 'down' cai, 'radial' sai para todos os lados | trail: emoji que acompanha cada um (ex.: dragão cuspindo fogo)
+        const SELECT_FX = {
+            fogo:   { glow:'#f97316', dir:'radial', emojis:['🔥','🔥','🔥','🌋','✨','☄️'] },
+            agua:   { glow:'#38bdf8', dir:'radial', emojis:['💧','🌊','🫧','💦','🐟','🐋'] },
+            terra:  { glow:'#4ade80', dir:'radial', emojis:['🌿','🍃','🪨','🌱','⛰️','🍄'] },
+            ar:     { glow:'#67e8f9', dir:'radial', emojis:['🌪️','💨','🍃','☁️','🪽','🌬️'] },
+            raio:   { glow:'#facc15', dir:'radial', emojis:['⚡','⚡','⛈️','🌩️','✨','💥'] },
+            veneno: { glow:'#84cc16', dir:'radial', emojis:['☠️','🧪','🫧','🐍','🕷️','🦠'] },
+            normal: { glow:'#d6d3d1', dir:'radial', emojis:['⚔️','🛡️','⭐','💥','🗡️','🏹'] },
+            shadow: { glow:'#a855f7', dir:'radial', emojis:['🦇','🦇','🌑','💀','👻','🕸️'] },
+            luz:    { glow:'#fde047', dir:'radial', emojis:['✨','☀️','🌟','😇','💫','🕊️'] },
+            dragao: { glow:'#f97316', dir:'radial', emojis:['🐉','🐲','🐉','🐲'], trail:'🔥' }
+        };
+
+        function spawnEmoji(grid, card, key, delay = 0) {
+            const f = SELECT_FX[key]; if (!f) return;
+            const g = grid.getBoundingClientRect(), c = card.getBoundingClientRect();
+            const cx = c.left - g.left + c.width / 2 + rnd(-c.width / 4, c.width / 4);
+            const cy = c.top - g.top + c.height / 2 + rnd(-c.height / 4, c.height / 4);
+            let ang = rnd(0, Math.PI * 2);
+                        const dist = rnd(130, 280);
+            const dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist;
+            const emoji = f.emojis[Math.floor(Math.random() * f.emojis.length)];
+            const dur = rnd(1.1, 1.9), size = rnd(22, 44), rot = rnd(-40, 40);
+            const mk = (txt, d, k, sz) => {
+                const el = document.createElement('span');
+                el.className = 'fx-e';
+                el.textContent = txt;
+                el.style.cssText = `left:${cx}px;top:${cy}px;font-size:${sz}px;--dx:${dx * k}px;--dy:${dy * k}px;--rot:${rot}deg;--s:${rnd(1, 1.5)};--dur:${dur}s;--delay:${d}s;--glow:${f.glow};` +
+                    (dx < 0 ? 'scale:-1 1;' : '');
+                el.style.scale = dx < 0 && txt !== '🔥' ? '-1 1' : '1 1'; // dragões/animais olham na direção do voo
+                grid.querySelector('.fx-back').appendChild(el);
+                setTimeout(() => el.remove(), (dur + d) * 1000 + 100);
+            };
+            mk(emoji, delay, 1, size);
+            if (f.trail) { mk(f.trail, delay + .08, .75, size * .8); mk(f.trail, delay + .16, .55, size * .6); }
+        }
+
+        let selectTimer = null;
+        function triggerSelectFx(key) {
+            const card = document.getElementById(`card-${key}`);
+            const grid = card && card.parentElement;
+            if (!grid) return;
+            let back = grid.querySelector('.fx-back');
+            if (!back) { back = document.createElement('div'); back.className = 'fx-back'; grid.prepend(back); }
+            back.innerHTML = '';
+            clearInterval(selectTimer);
+            document.querySelectorAll('.class-card').forEach(c => c.classList.remove('is-picked'));
+            void card.offsetWidth;
+            card.classList.add('is-picked');
+            for (let i = 0; i < 16; i++) spawnEmoji(grid, card, key, i * 0.05);
+            // continua soltando efeitos enquanto o card estiver selecionado
+            selectTimer = setInterval(() => {
+                if (!card.offsetParent || !card.classList.contains('is-picked')) return clearInterval(selectTimer);
+                spawnEmoji(grid, card, key);
+            }, 380);
+        }
+
+        function setupElementCards() {
+            document.querySelectorAll('.class-card').forEach(card => {
+                const key = card.id.replace('card-', '');
+                const layer = document.createElement('div');
+                layer.className = 'fx-layer';
+                card.appendChild(layer);
+                let last = 0;
+                card.addEventListener('mouseenter', () => {
+                    const r = card.getBoundingClientRect();
+                    for (let i = 0; i < 10; i++) spawnParticle(layer, key, rnd(10, r.width - 10), r.height - rnd(0, 30));
+                });
+                card.addEventListener('mousemove', e => {
+                    const now = performance.now();
+                    if (now - last < 40) return;
+                    last = now;
+                    const r = card.getBoundingClientRect();
+                    for (let i = 0; i < 2; i++) spawnParticle(layer, key, e.clientX - r.left + rnd(-14, 14), e.clientY - r.top + rnd(-6, 10));
+                });
+            });
+        }
+        window.addEventListener('DOMContentLoaded', setupElementCards);
     </script>
 </body>
 </html>
